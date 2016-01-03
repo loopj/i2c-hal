@@ -1,0 +1,7 @@
+application.cpp
+../../i2cdevlib/Arduino/I2Cdev/*.h
+../../i2cdevlib/Arduino/I2Cdev/*.cpp
+../../i2cdevlib/Arduino/MPU6050/*.h
+../../i2cdevlib/Arduino/MPU6050/*.cpp
+../../src/*.cpp
+../../src/*.h
