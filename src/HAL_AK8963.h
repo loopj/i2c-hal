@@ -20,6 +20,7 @@ public:
 private:
     AK8963 device;
     double scale;
+    Vector3 adjustment;
 };
 
 #endif // AK8963_INSTALLED
