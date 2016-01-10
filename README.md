@@ -1,12 +1,12 @@
-# Sensor Hardware Abstraction Layer (HAL) for i2cdevlib
+# I2C Sensor Abstraction Layer
 
 [![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 
-The [i2cdevlib](TODO) library by Jeff Rowberg is awesome, it allows quick and easy access to various I2C sensor devices without having to have to read device data-sheets or learn complex I2C interactions.
+The [i2cdevlib](https://github.com/jrowberg/i2cdevlib) library by Jeff Rowberg is awesome, it allows quick and easy access to various I2C sensor devices without having to have to read device data-sheets or learn complex I2C interactions.
 
 But what if you are building an app and you'd like to support multiple different sensor devices?
 
-This library allows you to use sensors like accelerometers, gyroscopes, and barometers without knowing the intimate details about the actual device connected.
+This library builds on i2cdevlib, allowing you to use sensors like accelerometers, gyroscopes, and barometers without knowing the intimate details about the actual device connected.
 
 ## Contents
 
@@ -16,6 +16,7 @@ This library allows you to use sensors like accelerometers, gyroscopes, and baro
 - [Devices](#devices)
 - [Platforms](#platforms)
 - [Contributing](#contributing)
+- [License](#license)
 
 
 ## Usage
