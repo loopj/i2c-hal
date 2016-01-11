@@ -1,7 +1,5 @@
 ../../i2cdevlib/Arduino/I2Cdev/I2Cdev.h
 ../../i2cdevlib/Arduino/I2Cdev/I2Cdev.cpp
-../../i2cdevlib/Arduino/AK8963/AK8963.h
-../../i2cdevlib/Arduino/AK8963/AK8963.cpp
 ../../i2cdevlib/Arduino/MPU6050/MPU6050.h
 ../../i2cdevlib/Arduino/MPU6050/MPU6050.cpp
 config.h

@@ -2,9 +2,6 @@
 
 #include "math.h"
 
-#define DEG_TO_RAD  0.017453292519943295769236907684886
-#define RAD_TO_DEG  57.295779513082320876798154814105
-
 class Vector3 {
 public:
     double x = 0.0;

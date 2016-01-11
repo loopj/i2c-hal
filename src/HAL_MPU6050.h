@@ -4,11 +4,13 @@
 
 #ifdef MPU6050_INSTALLED
 
-#include "Accelerometer.h"
-#include "Gyroscope.h"
 #include "MPU6050.h"
 
-class HAL_MPU6050 : public Accelerometer, public Gyroscope {
+#include "Accelerometer.h"
+#include "Gyroscope.h"
+#include "Thermometer.h"
+
+class HAL_MPU6050 : public Accelerometer, public Gyroscope, public Thermometer {
 public:
     static HAL_MPU6050& getInstance() {
         static HAL_MPU6050 instance;
@@ -16,9 +18,9 @@ public:
     }
 
     void initialize();
-    void groundCalibrate();
     Vector3 getAcceleration();
     Vector3 getRotation();
+    double getTemperature();
 
 private:
     MPU6050 device;
