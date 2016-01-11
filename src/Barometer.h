@@ -11,12 +11,9 @@
 
 class Barometer {
 public:
-    // Standard atmosphere, or average sea-level pressure in hPa (millibar)
+    // Standard atmosphere, or average sea-level pressure in hPa (millibars)
     static constexpr float PRESSURE_STANDARD_ATMOSPHERE = 1013.25F;
 
-    // Get the current air pressure in millibars
+    // Get the current air pressure in hPa (millibars)
     virtual double getPressure() = 0;
-
-    // Get the current altitude, in meters
-    virtual double getAltitude() = 0;
 };
