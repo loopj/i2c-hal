@@ -1,27 +1,34 @@
 #pragma once
 
-#include "math.h"
+#include <math.h>
 
-class Vector3 {
-public:
-    double x = 0.0;
-    double y = 0.0;
-    double z = 0.0;
+struct Vector3 {
+    union {
+        float v[3];
+        struct {
+            float x;
+            float y;
+            float z;
+        };
+        struct {
+            float azimuth;
+            float pitch;
+            float roll;
+        };
+    };
 
-    Vector3() {}
-
-    Vector3(double x, double y, double z) {
-        this->x = x;
-        this->y = y;
-        this->z = z;
+    Vector3() {
+        x = 0;
+        y = 0;
+        z = 0;
     }
 
-    double norm() {
+    float norm() {
         return sqrt(x*x + y*y + z*z);
     }
 
     void normalize() {
-        double n = norm();
+        float n = norm();
 
         if(n > 0) {
             x /= n;

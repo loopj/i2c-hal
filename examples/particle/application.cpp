@@ -1,5 +1,7 @@
 #include "application.h"
 
+#include "config.h"
+
 #include "Accelerometer.h"
 #include "Barometer.h"
 #include "Gyroscope.h"
@@ -28,8 +30,8 @@ void loop() {
 
     Barometer *barometer = Sensors::getBarometer();
     if(barometer) {
-        double p = barometer->getPressure();
-        Serial.printlnf("Pressure (mbar)       %+7.3f", p);
+        float p = barometer->getPressure();
+        Serial.printlnf("Pressure (hPa)        %+7.3f", p);
     }
 
     Gyroscope *gyroscope = Sensors::getGyroscope();
@@ -41,13 +43,13 @@ void loop() {
     Magnetometer *magnetometer = Sensors::getMagnetometer();
     if(magnetometer) {
         Vector3 m = magnetometer->getMagneticField();
-        Serial.printlnf("Magnetic Field (μT)   %+7.3f, %+7.3f, %+7.3f", m.x, m.y, m.z);
+        Serial.printlnf("Magnetic Field (uT)   %+7.3f, %+7.3f, %+7.3f", m.x, m.y, m.z);
     }
 
     Thermometer *thermometer = Sensors::getThermometer();
     if(thermometer) {
-        double t = thermometer->getTemperature();
-        Serial.printlnf("Temperature (°C)      %+7.3f", t);
+        float t = thermometer->getTemperature();
+        Serial.printlnf("Temperature (C)       %+7.3f", t);
     }
 
     delay(50);

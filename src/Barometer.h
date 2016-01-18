@@ -15,5 +15,5 @@ public:
     static constexpr float PRESSURE_STANDARD_ATMOSPHERE = 1013.25F;
 
     // Get the current air pressure in hPa (millibars)
-    virtual double getPressure() = 0;
+    virtual float getPressure() = 0;
 };

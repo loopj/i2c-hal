@@ -1,3 +1,0 @@
-[submodule "i2cdevlib"]
-	path = i2cdevlib
-	url = https://github.com/loopj/i2cdevlib.git

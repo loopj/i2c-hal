@@ -1,10 +1,4 @@
-../../i2cdevlib/Arduino/I2Cdev/I2Cdev.h
-../../i2cdevlib/Arduino/I2Cdev/I2Cdev.cpp
-../../i2cdevlib/Arduino/MPU6050/MPU6050.h
-../../i2cdevlib/Arduino/MPU6050/MPU6050.cpp
-../../i2cdevlib/Arduino/BMP085/BMP085.h
-../../i2cdevlib/Arduino/BMP085/BMP085.cpp
 config.h
-../../src/*.h
-../../src/*.cpp
+../../src/**/*.h
+../../src/**/*.cpp
 application.cpp

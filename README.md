@@ -2,11 +2,9 @@
 
 [![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 
-The [i2cdevlib](https://github.com/jrowberg/i2cdevlib) library by Jeff Rowberg is awesome, it allows quick and easy access to various I2C sensor devices without having to have to read device data-sheets or learn complex I2C interactions.
+This library allows you to use sensors like accelerometers, gyroscopes, and barometers without knowing the intimate details about the actual device connected, or having to have to read device data-sheets or learn complex I2C interactions.
 
-But what if you are building an app and you'd like to support multiple different sensor devices?
-
-This library builds on i2cdevlib, allowing you to use sensors like accelerometers, gyroscopes, and barometers without knowing the intimate details about the actual device connected.
+Inspired by the awesome [i2cdevlib](https://github.com/jrowberg/i2cdevlib) library by Jeff Rowberg.
 
 ## Contents
 
@@ -57,13 +55,13 @@ Using atmospheric pressure from a barometer, you can also compute the [altitude]
 Barometer *barometer = Sensors::getBarometer();
 
 // Get the current ambient air pressure, in hPA/mbar
-double pressure = barometer->getPressure();
+float pressure = barometer->getPressure();
 
 // Get the current altitude based on a standard baseline, in m
-double altitude = barometer->getAltitude();
+float altitude = barometer->getAltitude();
 
 // Get the current altitude based on a provided baseline, in m
-double altitude = barometer->getAltitude(baselinePressure);
+float altitude = barometer->getAltitude(baselinePressure);
 ```
 
 ### Gyroscope
@@ -101,7 +99,7 @@ A [thermometer](https://en.wikipedia.org/wiki/Thermometer) measures [temperature
 Thermometer *thermometer = Sensors::getThermometer();
 
 // Get the current temperature, in °C
-double temperature = thermometer->getTemperature();
+float temperature = thermometer->getTemperature();
 ```
 
 
@@ -109,7 +107,10 @@ double temperature = thermometer->getTemperature();
 
 TODO - describe coordinate system.
 
+
 ## Devices
+
+TODO - describe supported devices
 
 ### AK8963
 ### AK8975
@@ -121,6 +122,8 @@ TODO - describe coordinate system.
 ## Platforms
 
 This library currently only supports the Arduino and Particle platforms.
+
+TODO - explain how to add additional platforms.
 
 
 ## Contributing
