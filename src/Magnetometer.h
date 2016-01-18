@@ -12,6 +12,6 @@
 
 class Magnetometer {
 public:
-    // Get the current heading vector, in milliGauss
+    // Get the current magnetic field vector, in μT
     virtual Vector3 getMagneticField() = 0;
 };

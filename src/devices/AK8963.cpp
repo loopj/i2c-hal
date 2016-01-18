@@ -58,6 +58,19 @@ Vector3 AK8963::getMagneticField() {
     magneticField.y = rawField[1] * sensitivity.y * scale;
     magneticField.z = rawField[2] * sensitivity.z * scale;
 
+    float heading = 0;
+    if(magneticField.y > 0) {
+        heading = 90 - atan2(magneticField.x, magneticField.y) * 180/M_PI;
+    } else if(magneticField.y < 0) {
+        heading = 270 - atan2(magneticField.x, magneticField.y) * 180/M_PI;
+    } else if(magneticField.y == 0 && magneticField.x < 0) {
+        heading = 180.0;
+    } else {
+        heading = 0.0;
+    }
+
+    Serial.printlnf("Heading: %f", heading);
+
     return magneticField;
 }
 
