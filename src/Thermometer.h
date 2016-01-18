@@ -9,5 +9,5 @@
 class Thermometer {
 public:
     // Get the current ambient temperature in °C
-    virtual double getTemperature() = 0;
+    virtual float getTemperature() = 0;
 };
