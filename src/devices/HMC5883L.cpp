@@ -2,6 +2,7 @@
 
 #ifdef HMC5883L_INSTALLED
 
+#include <string.h>
 #include "HMC5883L.h"
 
 // Initialization
