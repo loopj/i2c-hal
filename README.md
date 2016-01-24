@@ -10,7 +10,6 @@ Inspired by the awesome [i2cdevlib](https://github.com/jrowberg/i2cdevlib) libra
 
 - [Usage](#usage)
 - [Sensors](#sensors)
-- [Coordinates](#coordinates)
 - [Devices](#devices)
 - [Platforms](#platforms)
 - [Contributing](#contributing)
@@ -22,9 +21,8 @@ Inspired by the awesome [i2cdevlib](https://github.com/jrowberg/i2cdevlib) libra
 First you'll need to define which sensor devices are installed:
 
 ```c++
-#define MPU6050_INSTALLED
+#define MPU6500_INSTALLED
 #define AK8963_INSTALLED
-#define BMP085_INSTALLED
 ```
 
 Then you can use sensors as describe below.
@@ -103,27 +101,22 @@ float temperature = thermometer->getTemperature();
 ```
 
 
-## Coordinates
-
-TODO - describe coordinate system.
-
-
 ## Devices
 
-TODO - describe supported devices
+This library supports the following I2C devices:
 
-### AK8963
-### AK8975
-### BMP085 / BMP180
-### HMC5883L
-### MPU6050
+- MPU6500 (Accelerometer, Gyroscope)
+- AK8963 (Magnetometer)
 
 
 ## Platforms
 
-This library currently only supports the Arduino and Particle platforms.
+This library has been tested on the following devices:
 
-TODO - explain how to add additional platforms.
+- [Particle Core](https://docs.particle.io/datasheets/core-datasheet/)
+- [Particle Photon](https://docs.particle.io/datasheets/photon-datasheet/)
+
+There is a good chance this library will also work "out of the box" with Arduino devices. If you'd like to add support for a new platform, you can implement the underlying I2C functions for your platform, take a look in `src/platforms` for examples.
 
 
 ## Contributing
