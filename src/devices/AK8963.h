@@ -12,6 +12,8 @@
 #define AK8963_ADDRESS_10           0x0E
 #define AK8963_ADDRESS_11           0x0F
 #define AK8963_DEFAULT_ADDRESS      AK8963_ADDRESS_00
+#define AK8963_DEVICE_ID            0x48
+#define AK8963_TWAT_US              100
 
 // Register map
 enum {
@@ -35,9 +37,6 @@ enum {
     AK8963_RA_ASAY      = 0x11, // R
     AK8963_RA_ASAZ      = 0x12  // R
 };
-
-// WIA
-#define AK8963_WIA_DEVICE_ID    0x48
 
 // ST1
 #define AK8963_ST1_DRDY_BIT     0
@@ -90,6 +89,9 @@ public:
     bool getDataReady();
     bool getDataOverrun();
 
+    // H registers
+    void getRawMeasurement(int16_t *rawField);
+
     // ST2 register
     bool getOverflowStatus();
     bool getOutputBit();
@@ -107,6 +109,7 @@ public:
     Vector3 getSensitivityAdjustment();
 
 protected:
+    float getScale(uint8_t resolution);
     float scale;
     Vector3 sensitivity;
 };

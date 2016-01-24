@@ -1,5 +1,4 @@
 #include "config.h"
-#include "application.h"
 
 #ifdef HMC5883L_INSTALLED
 

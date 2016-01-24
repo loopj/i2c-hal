@@ -35,6 +35,7 @@
 #define MPU6500_ADDRESS_AD0_LOW     0x68
 #define MPU6500_ADDRESS_AD0_HIGH    0x68
 #define MPU6500_DEFAULT_ADDRESS     MPU6500_ADDRESS_AD0_LOW
+#define MPU6500_DEVICE_ID           0x70
 
 // Register map
 enum {
@@ -217,7 +218,12 @@ public:
     uint8_t getClockSource();
     void setClockSource(uint8_t source);
 
-private:
+    // WHO_AM_I register
+    uint8_t getDeviceID();
+
+protected:
+    float getGyroScale(uint8_t gyroRange);
+    float getAccelScale(uint8_t accelRange);
     float accelScale;
     float gyroScale;
 };

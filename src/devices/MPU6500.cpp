@@ -23,14 +23,13 @@ void MPU6500::initialize() {
     // Allow direct I2C access to devices connected to the MPU6500 aux bus
     setI2cBypassEnabled(true);
 
-    // TODO: Update these scales internally when setFullScaleAccelRange etc are called
-    accelScale = 2048.0 * pow(2, 3 - getFullScaleAccelRange());
-    gyroScale = 16.4 * pow(2, 3 - getFullScaleGyroRange());
+    // Calculate the scale factors from the configured ranges
+    accelScale = getAccelScale(getFullScaleAccelRange());
+    gyroScale = getGyroScale(getFullScaleGyroRange());
 }
 
 bool MPU6500::testConnection() {
-    // TODO
-    return true;
+    return getDeviceID() == MPU6500_DEVICE_ID;
 }
 
 // Accelerometer
@@ -74,6 +73,7 @@ uint8_t MPU6500::getFullScaleGyroRange() {
 
 void MPU6500::setFullScaleGyroRange(uint8_t range) {
     writeBits(MPU6500_RA_GYRO_CONFIG, MPU6500_GYRO_FS_SEL_BIT, MPU6500_GYRO_FS_SEL_LEN, range);
+    gyroScale = getGyroScale(range);
 }
 
 // ACCEL_CONFIG register
@@ -85,6 +85,7 @@ uint8_t MPU6500::getFullScaleAccelRange() {
 
 void MPU6500::setFullScaleAccelRange(uint8_t range) {
     writeBits(MPU6500_RA_ACCEL_CONFIG, MPU6500_ACCEL_FS_SEL_BIT, MPU6500_ACCEL_FS_SEL_LEN, range);
+    accelScale = getAccelScale(range);
 }
 
 // INT_PIN_CFG register
@@ -128,6 +129,21 @@ uint8_t MPU6500::getClockSource() {
 
 void MPU6500::setClockSource(uint8_t source) {
     writeBits(MPU6500_RA_PWR_MGMT_1, MPU6500_CLKSEL_BIT, MPU6500_CLKSEL_LEN, source);
+}
+
+// WHO_AM_I register
+uint8_t MPU6500::getDeviceID() {
+    readByte(MPU6500_RA_WHO_AM_I, buffer);
+    return buffer[0];
+}
+
+// Private
+float MPU6500::getGyroScale(uint8_t gyroRange) {
+    return 16.4 * pow(2, 3 - gyroRange);
+}
+
+float MPU6500::getAccelScale(uint8_t accelRange) {
+    return 2048.0 * pow(2, 3 - accelRange);
 }
 
 #endif // MPU6500_INSTALLED

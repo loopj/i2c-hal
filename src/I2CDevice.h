@@ -27,6 +27,9 @@ protected:
     bool writeWord(uint8_t regAddr, uint16_t data);
     bool writeWords(uint8_t regAddr, uint8_t length, uint16_t *data);
 
+    // Platform-independent sleep/delay
+    void usleep(unsigned int us);
+
     // The I2C address for this device
     uint8_t address;
 

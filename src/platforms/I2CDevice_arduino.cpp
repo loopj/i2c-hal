@@ -87,4 +87,8 @@ bool I2CDevice::writeWords(uint8_t regAddr, uint8_t length, uint16_t *data) {
     return status == 0;
 }
 
+void I2CDevice::usleep(unsigned int us) {
+    delayMicroseconds(us);
+}
+
 #endif // defined(ARDUINO) || defined(SPARK)
