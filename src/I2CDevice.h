@@ -17,6 +17,7 @@ protected:
     int8_t readByte(uint8_t regAddr, uint8_t *data);
     int8_t readBytes(uint8_t regAddr, uint8_t length, uint8_t *data);
     int8_t readWord(uint8_t regAddr, uint16_t *data);
+    int8_t readWordSigned(uint8_t regAddr, int16_t *data);
     int8_t readWords(uint8_t regAddr, uint8_t length, uint16_t *data);
 
     // Write data to the specified I2C register on this device
