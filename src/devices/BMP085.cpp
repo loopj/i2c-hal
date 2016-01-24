@@ -23,24 +23,46 @@ bool BMP085::testConnection() {
 float BMP085::getPressure() {
     int32_t ut = getRawTemperature();
     int32_t up = getRawPressure();
+    int32_t b5 = computeB5(ut);
 
-    Serial.printlnf("ut=%d, up=%d", ut, up);
+    // Calculate true pressure
+    int32_t b6 = b5 - 4000;
+    int32_t x1 = (b2 * ((b6 * b6) >> 12)) >> 11;
+    int32_t x2 = (ac2 * b6) >> 11;
+    int32_t x3 = x1 + x2;
+    int32_t b3 = (((((int32_t) ac1) * 4 + x3) << oss) + 2) >> 2;
+    x1 = (ac3 * b6) >> 13;
+    x2 = (b1 * ((b6 * b6) >> 12)) >> 16;
+    x3 = ((x1 + x2) + 2) >> 2;
+    uint32_t b4 = (ac4 * (uint32_t) (x3 + 32768)) >> 15;
+    uint32_t b7 = ((uint32_t) (up - b3) * (50000 >> oss));
 
-    // TODO
-    return 0;
+    int32_t p;
+    if (b7 < 0x80000000) {
+        p = (b7 << 1) / b4;
+    } else {
+        p = (b7 / b4) << 1;
+    }
+
+    x1 = (p >> 8) * (p >> 8);
+    x1 = (x1 * 3038) >> 16;
+    x2 = (-7357 * p) >> 16;
+
+    p = p + ((x1 + x2 + 3791) >> 4);
+
+    // Convert to hPa
+    return p / 100;
 }
 
+// Thermometer
 float BMP085::getTemperature() {
-    float t;
     int16_t ut = getRawTemperature();
     int32_t b5 = computeB5(ut);
 
-    t = (b5+8) >> 4;
+    float t = (b5+8) >> 4;
 
     // Convert to C
-    t /= 10;
-
-    return t;
+    return t / 10.0;
 }
 
 // CAL registers
@@ -69,7 +91,7 @@ void BMP085::setControl(uint8_t value) {
     usleep(4500);
 }
 
-// DATA register
+// DATA registers
 int32_t BMP085::getRawTemperature() {
     int16_t rawTemperature;
 
@@ -79,14 +101,13 @@ int32_t BMP085::getRawTemperature() {
     return rawTemperature;
 }
 
-// TODO: get this working
 int32_t BMP085::getRawPressure() {
     int32_t rawPressure;
 
     setControl(BMP085_CONTROL_PRESSURE_0);
 
     readBytes(BMP085_RA_DATA, 3, buffer);
-    rawPressure = ((uint32_t)buffer[0] << 16) + ((uint16_t)buffer[1] << 8) + buffer[2];
+    rawPressure = (((uint32_t)buffer[0] << 16) + ((uint16_t)buffer[1] << 8) + buffer[2]) >> (8 - oss);
 
     return rawPressure;
 }
