@@ -9,6 +9,10 @@
 #include "AK8963.h"
 #endif
 
+#ifdef HMC5883L_INSTALLED
+#include "HMC5883L.h"
+#endif
+
 void Sensors::initialize() {
     #ifdef MPU6500_INSTALLED
     MPU6500::getInstance().initialize();
@@ -17,10 +21,14 @@ void Sensors::initialize() {
     #ifdef AK8963_INSTALLED
     AK8963::getInstance().initialize();
     #endif
+
+    #ifdef HMC5883L_INSTALLED
+    HMC5883L::getInstance().initialize();
+    #endif
 }
 
 Accelerometer *Sensors::getAccelerometer() {
-    #ifdef MPU6500_INSTALLED
+    #if defined(MPU6500_INSTALLED)
     return &MPU6500::getInstance();
     #else
     return NULL;
@@ -32,7 +40,7 @@ Barometer *Sensors::getBarometer() {
 }
 
 Gyroscope *Sensors::getGyroscope() {
-    #ifdef MPU6500_INSTALLED
+    #if defined(MPU6500_INSTALLED)
     return &MPU6500::getInstance();
     #else
     return NULL;
@@ -40,8 +48,10 @@ Gyroscope *Sensors::getGyroscope() {
 }
 
 Magnetometer *Sensors::getMagnetometer() {
-    #ifdef AK8963_INSTALLED
+    #if defined(AK8963_INSTALLED)
     return &AK8963::getInstance();
+    #elif defined(HMC5883L_INSTALLED)
+    return &HMC5883L::getInstance();
     #else
     return NULL;
     #endif
