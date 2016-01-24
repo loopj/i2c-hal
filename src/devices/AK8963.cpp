@@ -12,15 +12,17 @@ AK8963::AK8963(uint8_t address) {
 void AK8963::initialize() {
     // Fetch sensitivity adjustment values from the fuse-rom
     setMode(AK8963_MODE_FUSEROM);
-    sensitivity = getSensitivityAdjustment();
+    getSensitivityAdjustment(asa);
 
     // Enable continuous measurement at maximum resolution
     setMode(AK8963_MODE_CONTINUOUS_100HZ);
     setResolution(AK8963_BIT_16);
 
     // Calculate the scale factor from the configured resolution
-    uint8_t gain = getResolution();
-    scale = getScale(gain);
+    uint8_t resolution = getResolution();
+    scale.x = getScale(asa[0], resolution);
+    scale.y = getScale(asa[1], resolution);
+    scale.z = getScale(asa[2], resolution);
 }
 
 bool AK8963::testConnection() {
@@ -36,9 +38,9 @@ Vector3 AK8963::getMagneticField() {
     getRawMeasurement(rawField);
 
     // Apply sensitivity adjustments, scale to get uT
-    magneticField.x = rawField[0] * sensitivity.x * scale;
-    magneticField.y = rawField[1] * sensitivity.y * scale;
-    magneticField.z = rawField[2] * sensitivity.z * scale;
+    magneticField.x = rawField[0] * scale.x;
+    magneticField.y = rawField[1] * scale.y;
+    magneticField.z = rawField[2] * scale.z;
 
     return magneticField;
 }
@@ -102,7 +104,9 @@ uint8_t AK8963::getResolution() {
 
 void AK8963::setResolution(uint8_t resolution) {
     writeBit(AK8963_RA_CNTL1, AK8963_CNTL1_BIT_BIT, resolution);
-    scale = getScale(resolution);
+    scale.x = getScale(asa[0], resolution);
+    scale.y = getScale(asa[1], resolution);
+    scale.z = getScale(asa[2], resolution);
 }
 
 // CNTL2 register
@@ -111,28 +115,23 @@ void AK8963::reset() {
 }
 
 // ASA registers
-Vector3 AK8963::getSensitivityAdjustment() {
-    Vector3 sensitivity;
-
-    readBytes(AK8963_RA_ASAX, 3, &buffer[0]);
-
-    sensitivity.x = (float)(buffer[0] - 128)/256.0 + 1.0;
-    sensitivity.y = (float)(buffer[1] - 128)/256.0 + 1.0;
-    sensitivity.z = (float)(buffer[2] - 128)/256.0 + 1.0;
-
-    return sensitivity;
+void AK8963::getSensitivityAdjustment(uint8_t *asa) {
+    readBytes(AK8963_RA_ASAX, 3, asa);
 }
 
 // Private
-float AK8963::getScale(uint8_t resolution) {
-    switch(resolution) {
-        case AK8963_BIT_14:
-            return 4912.0 / 8190.0;
-        case AK8963_BIT_16:
-            return 4912.0 / 32760.0;
-        default:
-            return 4912.0 / 32760.0;
+float AK8963::getScale(uint8_t asa, uint8_t resolution) {
+    // Get the scale factor from raw to uT, depending on resolution
+    float resScale;
+    if(resolution == AK8963_BIT_16) {
+        resScale = 4912.0 / 32760.0;
+    } else {
+        resScale = 4912.0 / 8190.0;
     }
+
+    // Apply sensitivity adjustments according to datasheet
+    // Hadj = H * (ASA + 128) / 256
+    return ((asa + 128.0) / 256.0) * resScale;
 }
 
 #endif // AK8963_INSTALLED

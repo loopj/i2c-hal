@@ -106,12 +106,12 @@ public:
     void reset();
 
     // ASA registers
-    Vector3 getSensitivityAdjustment();
+    void getSensitivityAdjustment(uint8_t *asa);
 
 protected:
-    float getScale(uint8_t resolution);
-    float scale;
-    Vector3 sensitivity;
+    float getScale(uint8_t asa, uint8_t resolution);
+    uint8_t asa[3];
+    Vector3 scale;
 };
 
 #endif // AK8963_INSTALLED
