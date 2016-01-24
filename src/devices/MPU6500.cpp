@@ -4,6 +4,7 @@
 
 #include "MPU6500.h"
 
+// Initialization
 MPU6500::MPU6500(uint8_t address) {
     this->address = address;
 }
@@ -27,6 +28,12 @@ void MPU6500::initialize() {
     gyroScale = 16.4 * pow(2, 3 - getFullScaleGyroRange());
 }
 
+bool MPU6500::testConnection() {
+    // TODO
+    return true;
+}
+
+// Accelerometer
 Vector3 MPU6500::getAcceleration() {
     Vector3 acceleration;
 
@@ -42,6 +49,7 @@ Vector3 MPU6500::getAcceleration() {
     return acceleration;
 }
 
+// Gyroscope
 Vector3 MPU6500::getRotation() {
     Vector3 rotation;
 

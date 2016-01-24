@@ -85,7 +85,10 @@ Using magnetic field readings from a magnetometer, you can also compute the [azi
 Magnetometer *magnetometer = Sensors::getMagnetometer();
 
 // Get the current magnetic field strength vector (x/y/z), in μT
-Vector3 magneticField = gyroscope->getMagneticField();
+Vector3 magneticField = magnetometer->getMagneticField();
+
+// Get the current azimuth (compass direction), optionally adjusting for declination
+float azimuth = magnetometer->getAzimuth();
 ```
 
 ### Thermometer
@@ -107,6 +110,7 @@ This library supports the following I2C devices:
 
 - MPU6500 (Accelerometer, Gyroscope)
 - AK8963 (Magnetometer)
+- HMC5883L (Magnetometer)
 
 
 ## Platforms

@@ -31,7 +31,7 @@
 #include "I2CDevice.h"
 #include "Vector3.h"
 
-// I2C address options
+// Device info
 #define MPU6500_ADDRESS_AD0_LOW     0x68
 #define MPU6500_ADDRESS_AD0_HIGH    0x68
 #define MPU6500_DEFAULT_ADDRESS     MPU6500_ADDRESS_AD0_LOW
@@ -186,6 +186,7 @@ public:
     // Initialization
     MPU6500(uint8_t address = MPU6500_DEFAULT_ADDRESS);
     void initialize();
+    bool testConnection();
 
     // Accelerometer
     Vector3 getAcceleration();

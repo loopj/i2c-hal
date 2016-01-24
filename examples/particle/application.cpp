@@ -47,6 +47,9 @@ void loop() {
     if(magnetometer) {
         Vector3 m = magnetometer->getMagneticField();
         Serial.printlnf("Magnetic Field (uT)   %+7.3f, %+7.3f, %+7.3f", m.x, m.y, m.z);
+
+        float azimuth = magnetometer->getAzimuth();
+        Serial.printlnf("Azimuth (deg)         %+7.3f", azimuth);
     }
 
     Thermometer *thermometer = Sensors::getThermometer();

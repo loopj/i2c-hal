@@ -6,7 +6,7 @@
 #include "Magnetometer.h"
 #include "Vector3.h"
 
-// I2C address options
+// Device info
 #define AK8963_ADDRESS_00           0x0C
 #define AK8963_ADDRESS_01           0x0D
 #define AK8963_ADDRESS_10           0x0E

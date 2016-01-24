@@ -12,6 +12,12 @@
 
 class Magnetometer {
 public:
+    // Gauss to microTesla multiplier
+    static constexpr float GAUSS_TO_MICROTESLA = 100.0;
+
     // Get the current magnetic field vector, in μT
     virtual Vector3 getMagneticField() = 0;
+
+    // Get the current azimuth (compass direction), optionally adjusting for declination
+    float getAzimuth(float declination = 0.0);
 };
