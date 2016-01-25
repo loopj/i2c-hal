@@ -1,8 +1,6 @@
 # I2C Sensor Abstraction Layer
 
-[![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
-
-This library allows you to use sensors like accelerometers, gyroscopes, and barometers without knowing the intimate details about the actual device connected, or having to have to read device data-sheets or learn complex I2C interactions.
+This library allows you to use sensors like accelerometers, gyroscopes, and barometers with your Particle Photon, Particle Core or Arduino. without knowing the intimate details about the actual device connected, or having to have to read device data-sheets or learn complex I2C interactions.
 
 Inspired by the awesome [i2cdevlib](https://github.com/jrowberg/i2cdevlib) library by Jeff Rowberg.
 
@@ -44,7 +42,7 @@ Vector3 acceleration = accelerometer->getAcceleration();
 
 ### Barometer
 
-A [barometer](https://en.wikipedia.org/wiki/Barometer) measures [atmospheric pressure](https://en.wikipedia.org/wiki/Atmospheric_pressure) in hPa or mbar.
+A [barometer](https://en.wikipedia.org/wiki/Barometer) measures [atmospheric pressure](https://en.wikipedia.org/wiki/Atmospheric_pressure) in [hPa](https://en.wikipedia.org/wiki/Pascal_(unit)) (or millibars).
 
 Using atmospheric pressure from a barometer, you can also compute the [altitude](https://en.wikipedia.org/wiki/Altitude) in meters.
 
@@ -67,7 +65,7 @@ float sealevelPressure = barometer->getSealevelPressure(altitude);
 
 ### Gyroscope
 
-A [gyroscope](https://en.wikipedia.org/wiki/Gyroscope) measures the [rotational speed](https://en.wikipedia.org/wiki/Rotational_speed) in rad/s, on three axes.
+A [gyroscope](https://en.wikipedia.org/wiki/Gyroscope) measures the [rotational speed](https://en.wikipedia.org/wiki/Rotational_speed) in [rad/s](https://en.wikipedia.org/wiki/Radian_per_second), on three axes.
 
 ```c++
 // Get access to the gyroscope
@@ -96,7 +94,7 @@ float azimuth = magnetometer->getAzimuth();
 
 ### Thermometer
 
-A [thermometer](https://en.wikipedia.org/wiki/Thermometer) measures [temperature](https://en.wikipedia.org/wiki/Temperature) in °C.
+A [thermometer](https://en.wikipedia.org/wiki/Thermometer) measures [temperature](https://en.wikipedia.org/wiki/Temperature) in [°C](https://en.wikipedia.org/wiki/Celsius).
 
 ```c++
 // Get access to the thermometer
@@ -109,12 +107,29 @@ float temperature = thermometer->getTemperature();
 
 ## Devices
 
-This library supports the following I2C devices:
+The following I2C devices are currently supported by this library:
 
-- AK8963 (Magnetometer)
-- BMP085 (Barometer)
-- HMC5883L (Magnetometer)
-- MPU6500 (Accelerometer, Gyroscope)
+### AK8963
+
+- Magnetometer
+- `#define AK8963_INSTALLED`
+
+### BMP085
+
+- Barometer, Thermometer
+- `#define BMP085_INSTALLED`
+- Probably also compatible with BMP180
+
+### HMC5883L
+
+- Magnetometer
+- `#define HMC5883L_INSTALLED`
+
+### MPU6500
+
+- Accelerometer, Gyroscope
+- `#define MPU6500_INSTALLED`
+- Probably also compatible with MPU6050
 
 
 ## Platforms
