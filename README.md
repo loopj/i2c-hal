@@ -1,8 +1,8 @@
 # I2C Sensor Abstraction Layer
 
-This library allows you to use sensors like accelerometers, gyroscopes, and barometers with your [Particle](https://www.particle.io/) or [Arduino](https://www.arduino.cc/) device. without knowing the intimate details about the actual device connected, or having to have to read device data-sheets or learn complex I2C interactions.
+This library allows you to use sensors like accelerometers, gyroscopes, and barometers in your [Particle](https://www.particle.io/) and [Arduino](https://www.arduino.cc/) projects, without knowing the intimate details about the actual device connected. Say goodbye to reading device data-sheets or learning complex I2C interactions.
 
-Sensor functions always return [SI units](https://en.wikipedia.org/wiki/International_System_of_Units), so no complex conversions are required.
+Sensor functions always return [SI units](https://en.wikipedia.org/wiki/International_System_of_Units), so no extra conversions are required.
 
 Inspired by the awesome [i2cdevlib](https://github.com/jrowberg/i2cdevlib) library by Jeff Rowberg.
 
