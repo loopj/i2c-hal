@@ -52,14 +52,17 @@ Using atmospheric pressure from a barometer, you can also compute the [altitude]
 // Get access to the barometer
 Barometer *barometer = Sensors::getBarometer();
 
-// Get the current ambient air pressure, in hPA/mbar
+// Get the current ambient air pressure in hPA (mbar)
 float pressure = barometer->getPressure();
 
-// Get the current altitude based on a standard baseline, in m
+// Get the current altitude in m, based on the standard baseline pressure
 float altitude = barometer->getAltitude();
 
-// Get the current altitude based on a provided baseline, in m
+// Get the current altitude in m, based on a provided baseline pressure
 float altitude = barometer->getAltitude(baselinePressure);
+
+// Get the pressure at sea-level in hPa, given the current altitude
+float sealevelPressure = barometer->getSealevelPressure(altitude);
 ```
 
 ### Gyroscope
@@ -108,9 +111,10 @@ float temperature = thermometer->getTemperature();
 
 This library supports the following I2C devices:
 
-- MPU6500 (Accelerometer, Gyroscope)
 - AK8963 (Magnetometer)
+- BMP085 (Barometer)
 - HMC5883L (Magnetometer)
+- MPU6500 (Accelerometer, Gyroscope)
 
 
 ## Platforms
