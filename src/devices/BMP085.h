@@ -8,6 +8,7 @@
 
 // Device info
 #define BMP085_ADDRESS             0x77
+#define BMP085_DEVICE_ID           0x55
 
 // Register map
 enum {
@@ -22,19 +23,22 @@ enum {
     BMP085_RA_CAL_MB             = 0xBA, // R
     BMP085_RA_CAL_MC             = 0xBC, // R
     BMP085_RA_CAL_MD             = 0xBE, // R
-    BMP085_RA_CHIPID             = 0xD0,
-    BMP085_RA_VERSION            = 0xD1,
-    BMP085_RA_SOFTRESET          = 0xE0,
-    BMP085_RA_CONTROL            = 0xF4,
-    BMP085_RA_DATA               = 0xF6
+    BMP085_RA_CHIPID             = 0xD0, // R
+    BMP085_RA_VERSION            = 0xD1, // R
+    BMP085_RA_SOFTRESET          = 0xE0, // R/W
+    BMP085_RA_CONTROL            = 0xF4, // R/W
+    BMP085_RA_DATA               = 0xF6  // R
 };
 
 // CONTROL
 #define BMP085_CONTROL_TEMPERATURE      0x2E
-#define BMP085_CONTROL_PRESSURE_0       0x34
-#define BMP085_CONTROL_PRESSURE_1       0x74
-#define BMP085_CONTROL_PRESSURE_2       0xB4
-#define BMP085_CONTROL_PRESSURE_3       0xF4
+#define BMP085_CONTROL_PRESSURE         0x34
+
+// CONTROL oversampling modes
+#define BMP085_MODE_ULTRALOWPOWER       0
+#define BMP085_MODE_STANDARD            1
+#define BMP085_MODE_HIGHRES             2
+#define BMP085_MODE_ULTRAHIGHRES        3
 
 class BMP085 : public I2CDevice, public Barometer, public Thermometer {
 public:
@@ -57,9 +61,13 @@ public:
     // CAL registers
     void loadCalibration();
 
+    // CHIPID register
+    uint8_t getDeviceID();
+
     // CONTROL register
     uint8_t getControl();
     void setControl(uint8_t value);
+    void setOversamplingMode(uint8_t mode);
 
     // DATA register
     int32_t getRawTemperature();

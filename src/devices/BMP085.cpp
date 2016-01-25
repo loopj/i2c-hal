@@ -12,20 +12,20 @@ BMP085::BMP085() {
 
 void BMP085::initialize() {
     loadCalibration();
+    setOversamplingMode(BMP085_MODE_STANDARD);
 }
 
 bool BMP085::testConnection() {
-    // TODO
-    return true;
+    return getDeviceID() == BMP085_DEVICE_ID;
 }
 
 // Barometer
 float BMP085::getPressure() {
     int32_t ut = getRawTemperature();
     int32_t up = getRawPressure();
-    int32_t b5 = computeB5(ut);
 
-    // Calculate true pressure
+    // Calculate true pressure, according to datasheet rules
+    int32_t b5 = computeB5(ut);
     int32_t b6 = b5 - 4000;
     int32_t x1 = (b2 * ((b6 * b6) >> 12)) >> 11;
     int32_t x2 = (ac2 * b6) >> 11;
@@ -51,14 +51,15 @@ float BMP085::getPressure() {
     p = p + ((x1 + x2 + 3791) >> 4);
 
     // Convert to hPa
-    return p / 100;
+    return p / 100.0;
 }
 
 // Thermometer
 float BMP085::getTemperature() {
     int16_t ut = getRawTemperature();
-    int32_t b5 = computeB5(ut);
 
+    // Calculate true temperature, according to datasheet rules
+    int32_t b5 = computeB5(ut);
     float t = (b5+8) >> 4;
 
     // Convert to C
@@ -80,6 +81,12 @@ void BMP085::loadCalibration() {
     readWordSigned(BMP085_RA_CAL_MD, &md);
 }
 
+// CHIPID register
+uint8_t BMP085::getDeviceID() {
+    readByte(BMP085_RA_CHIPID, buffer);
+    return buffer[0]
+}
+
 // CONTROL register
 uint8_t BMP085::getControl() {
     readByte(BMP085_RA_CONTROL, buffer);
@@ -88,14 +95,23 @@ uint8_t BMP085::getControl() {
 
 void BMP085::setControl(uint8_t value) {
     writeByte(BMP085_RA_CONTROL, value);
-    usleep(4500);
+}
+
+void BMP085::setOversamplingMode(uint8_t mode) {
+    oss = mode;
 }
 
 // DATA registers
 int32_t BMP085::getRawTemperature() {
     int16_t rawTemperature;
 
+    // Start temperature measurement
     setControl(BMP085_CONTROL_TEMPERATURE);
+
+    // Wait for the conversion to complete
+    usleep(4500);
+
+    // Read the raw temperature data;
     readWordSigned(BMP085_RA_DATA, &rawTemperature);
 
     return rawTemperature;
@@ -104,8 +120,26 @@ int32_t BMP085::getRawTemperature() {
 int32_t BMP085::getRawPressure() {
     int32_t rawPressure;
 
-    setControl(BMP085_CONTROL_PRESSURE_0);
+    // Start pressure measurement, with the configured oversampling setting
+    setControl(BMP085_CONTROL_PRESSURE + (oss << 6));
 
+    // Wait for the conversion to complete
+    switch(oss) {
+        case BMP085_MODE_ULTRALOWPOWER:
+            usleep(4500);
+            break;
+        case BMP085_MODE_STANDARD:
+            usleep(7500);
+            break;
+        case BMP085_MODE_HIGHRES:
+            usleep(13500);
+            break;
+        case BMP085_MODE_ULTRAHIGHRES:
+            usleep(25500);
+            break;
+    }
+
+    // Read the raw pressure data
     readBytes(BMP085_RA_DATA, 3, buffer);
     rawPressure = (((uint32_t)buffer[0] << 16) + ((uint16_t)buffer[1] << 8) + buffer[2]) >> (8 - oss);
 
