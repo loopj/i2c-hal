@@ -14,6 +14,12 @@ public:
     // Standard atmosphere, or average sea-level pressure in hPa (millibars)
     static constexpr float PRESSURE_STANDARD_ATMOSPHERE = 1013.25F;
 
-    // Get the current air pressure in hPa (millibars)
+    // Get the current air pressure in hPa
     virtual float getPressure() = 0;
+
+    // Get the current altitude in m, given a baseline pressure in hPa
+    float getAltitude(float baselinePressure = PRESSURE_STANDARD_ATMOSPHERE);
+
+    // Get the pressure at sea-level in hPa, given the current altitude in m
+    float getSealevelPressure(float altitude);
 };

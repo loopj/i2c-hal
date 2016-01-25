@@ -35,6 +35,9 @@ void loop() {
     if(barometer) {
         float p = barometer->getPressure();
         Serial.printlnf("Pressure (hPa)        %+7.3f", p);
+
+        float a = barometer->getAltitude();
+        Serial.printlnf("Altitude (m)          %+7.3f", a);
     }
 
     Gyroscope *gyroscope = Sensors::getGyroscope();

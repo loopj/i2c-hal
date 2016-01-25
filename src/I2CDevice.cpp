@@ -29,6 +29,15 @@ int8_t I2CDevice::readWord(uint8_t regAddr, uint16_t *data) {
     return readWords(regAddr, 1, data);
 }
 
+int8_t I2CDevice::readWordSigned(uint8_t regAddr, int16_t *data) {
+    uint16_t temp;
+
+    int8_t status = readWords(regAddr, 1, &temp);
+    *data = (int16_t)temp;
+
+    return status;
+}
+
 bool I2CDevice::writeBit(uint8_t regAddr, uint8_t bitNum, uint8_t data) {
     uint8_t b;
     readByte(regAddr, &b);
