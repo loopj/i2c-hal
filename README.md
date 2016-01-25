@@ -16,14 +16,19 @@ Inspired by the awesome [i2cdevlib](https://github.com/jrowberg/i2cdevlib) libra
 
 ## Usage
 
-First you'll need to define which sensor devices are installed:
+First you'll need to define which [devices](#devices) are installed:
 
 ```c++
 #define MPU6500_INSTALLED
 #define AK8963_INSTALLED
 ```
 
-Then you can use sensors as describe below.
+Then you can use [sensors](#sensors) as follows:
+
+```c++
+Accelerometer *accelerometer = Sensors::getAccelerometer();
+Vector3 acceleration = accelerometer->getAcceleration();
+```
 
 
 ## Sensors
