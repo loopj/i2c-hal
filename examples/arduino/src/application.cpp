@@ -8,6 +8,8 @@
 #include "Sensors.h"
 #include "Vector3.h"
 
+// Serial.printlnf
+// Requires compile flags: -Wl,-u,vfprintf -lprintf_flt
 void printlnf(const char *format, ...) {
     char buf[255];
     va_list args;
@@ -21,9 +23,6 @@ void printlnf(const char *format, ...) {
 void setup() {
     // Activate serial port (for debug printing)
     Serial.begin(115200);
-
-    delay(5000);
-    Serial.println("STARTING");
 
     // Activate i2c
     Wire.begin();
@@ -42,7 +41,7 @@ void loop() {
     Barometer *barometer = Sensors::getBarometer();
     if(barometer) {
         float p = barometer->getPressure();
-        printlnf("Pressure (hPa)        %+7.3f", p);
+        printlnf("Pressure (hPa)        %f", p);
 
         float a = barometer->getAltitude();
         printlnf("Altitude (m)          %+7.3f", a);
@@ -68,8 +67,6 @@ void loop() {
         float t = thermometer->getTemperature();
         printlnf("Temperature (C)       %+7.3f", t);
     }
-
-    printlnf("Tick");
 
     delay(50);
 }
