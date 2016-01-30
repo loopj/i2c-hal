@@ -1,5 +1,3 @@
-#include "config.h"
-
 #ifdef MPU6500_INSTALLED
 
 #include "MPU6500.h"

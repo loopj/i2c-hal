@@ -1,5 +1,3 @@
-#include "config.h"
-
 #ifdef AK8963_INSTALLED
 
 #include "AK8963.h"

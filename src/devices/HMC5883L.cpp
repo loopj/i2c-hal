@@ -1,5 +1,3 @@
-#include "config.h"
-
 #ifdef HMC5883L_INSTALLED
 
 #include <string.h>

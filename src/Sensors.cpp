@@ -1,4 +1,3 @@
-#include "config.h"
 #include "Sensors.h"
 
 #ifdef AK8963_INSTALLED
@@ -39,7 +38,7 @@ Accelerometer *Sensors::getAccelerometer() {
     #if defined(MPU6500_INSTALLED)
     return &MPU6500::getInstance();
     #else
-    return NULL;
+    return nullptr;
     #endif
 }
 
@@ -47,7 +46,7 @@ Barometer *Sensors::getBarometer() {
     #if defined(BMP085_INSTALLED)
     return &BMP085::getInstance();
     #else
-    return NULL;
+    return nullptr;
     #endif
 }
 
@@ -55,7 +54,7 @@ Gyroscope *Sensors::getGyroscope() {
     #if defined(MPU6500_INSTALLED)
     return &MPU6500::getInstance();
     #else
-    return NULL;
+    return nullptr;
     #endif
 }
 
@@ -65,7 +64,7 @@ Magnetometer *Sensors::getMagnetometer() {
     #elif defined(HMC5883L_INSTALLED)
     return &HMC5883L::getInstance();
     #else
-    return NULL;
+    return nullptr;
     #endif
 }
 
@@ -73,6 +72,6 @@ Thermometer *Sensors::getThermometer() {
     #if defined(BMP085_INSTALLED)
     return &BMP085::getInstance();
     #else
-    return NULL;
+    return nullptr;
     #endif
 }
