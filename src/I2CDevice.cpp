@@ -1,4 +1,4 @@
-// Platform-independent I2C methods
+// Framework-independent I2C methods
 
 #include "I2CDevice.h"
 
