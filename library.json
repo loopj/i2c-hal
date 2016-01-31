@@ -1,6 +1,6 @@
 {
     "name": "Sensors",
-    "keywords": "i2c, sensors, accelerometer, gyroscope, barometer",
+    "keywords": "i2c, sensors, accelerometer, gyroscope, barometer, ak8963, bmp085, hmc5883l, mpu6050",
     "description": "Use I2C-connected sensors like accelerometers, gyroscopes, and barometers in your projects, without knowing the intimate details about the actual device connected.",
     "repository":
     {
