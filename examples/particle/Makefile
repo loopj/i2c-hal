@@ -1,4 +1,4 @@
-BINARY_NAME = i2cdevlib-hal
+BINARY_NAME = i2c-sensor-hal
 DEVICE_TYPE ?= photon
 FIRMWARE = $(BINARY_NAME)-$(DEVICE_TYPE).bin
 

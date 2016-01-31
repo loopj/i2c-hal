@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Sensor_Config.h"
+
 #include "Accelerometer.h"
 #include "Barometer.h"
 #include "Gyroscope.h"

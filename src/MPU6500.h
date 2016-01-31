@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include "Sensor_Config.h"
+
 #ifdef MPU6500_INSTALLED
 
 #include <stdint.h>

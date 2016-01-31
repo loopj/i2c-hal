@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Sensor_Config.h"
+
 #ifdef AK8963_INSTALLED
 
 #include "I2CDevice.h"

@@ -1,4 +1,4 @@
-#include "config.h"
+#include "Sensor_Config.h"
 
 #ifdef HMC5883L_INSTALLED
 

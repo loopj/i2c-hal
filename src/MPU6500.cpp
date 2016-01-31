@@ -1,4 +1,4 @@
-#include "config.h"
+#include "Sensor_Config.h"
 
 #ifdef MPU6500_INSTALLED
 

@@ -1,5 +1,4 @@
-#include "config.h"
-#include "application.h"
+#include "Sensor_Config.h"
 
 #ifdef BMP085_INSTALLED
 
@@ -84,7 +83,7 @@ void BMP085::loadCalibration() {
 // CHIPID register
 uint8_t BMP085::getDeviceID() {
     readByte(BMP085_RA_CHIPID, buffer);
-    return buffer[0]
+    return buffer[0];
 }
 
 // CONTROL register
