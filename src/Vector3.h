@@ -11,7 +11,10 @@ struct Vector3 {
             float z;
         };
         struct {
-            float azimuth;
+            union {
+                float azimuth;
+                float yaw;
+            };
             float pitch;
             float roll;
         };
