@@ -40,7 +40,7 @@ int8_t I2CDevice::readWords(uint8_t regAddr, uint8_t length, uint16_t *data) {
     Wire.endTransmission();
 
     // Request length*2 bytes of data
-    Wire.requestFrom(address, length * 2);
+    Wire.requestFrom(address, (uint8_t)(length * 2));
     bool msb = true;
     while(Wire.available()) {
         // Combine bytes into words
