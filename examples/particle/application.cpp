@@ -1,7 +1,5 @@
 #include "application.h"
 
-#include "config.h"
-
 #include "Accelerometer.h"
 #include "Barometer.h"
 #include "Gyroscope.h"

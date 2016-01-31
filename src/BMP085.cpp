@@ -1,3 +1,5 @@
+#include "Sensor_Config.h"
+
 #ifdef BMP085_INSTALLED
 
 #include "BMP085.h"

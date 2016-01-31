@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Sensor_Config.h"
+
 #ifdef BMP085_INSTALLED
 
 #include "I2CDevice.h"
