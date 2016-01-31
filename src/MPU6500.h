@@ -1,25 +1,3 @@
-/**
- * The InvenSense MPU6500 contains a 3-axis gyroscope and 3-axis accelerometer
- *
- * General
- *  - Can select internal clock source, gyro clock source is most accurate
- *  - Contains a 4096-byte FIFO for buffering sensor data reads
- *  - Contains a chip temperature sensor, not suitable for use as Thermometer
- *
- * I2C
- *  - Supports I2C fast mode (400khz)
- *  - Can act as I2C master, enable passthrough to access connected I2C devices
- *
- * Gyroscope
- *  - Programmable full-scale range of ±250, ±500, ±1000, and ±2000 degrees/sec
- *  - Wakes from sleep mode in 35ms
- *
- * Accelerometer
- *  - Programmable full-scale range of ±2g, ±4g, ±8g, and ±16g
- *  - Wakes from sleep mode in 20ms
- *  - Wakes from cold start in 30ms
- */
-
 #pragma once
 
 #include "Sensor_Config.h"

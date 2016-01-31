@@ -1,5 +1,5 @@
 {
-    "name": "I2C-Sensors",
+    "name": "Sensors",
     "keywords": "i2c, sensors, accelerometer, gyroscope, barometer",
     "description": "Use I2C-connected sensors like accelerometers, gyroscopes, and barometers in your projects, without knowing the intimate details about the actual device connected.",
     "repository":

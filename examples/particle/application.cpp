@@ -11,9 +11,6 @@ void setup() {
     // Activate serial port (for debug printing)
     Serial.begin(115200);
 
-    delay(5000);
-    Serial.println("STARTING");
-
     // Activate high-speed i2c
     Wire.setSpeed(CLOCK_SPEED_400KHZ);
     Wire.begin();

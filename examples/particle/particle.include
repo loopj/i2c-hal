@@ -1,4 +1,2 @@
-config.h
-../../src/*.h
-../../src/*.cpp
-application.cpp
+**/*.h
+**/*.cpp
