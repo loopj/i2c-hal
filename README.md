@@ -1,10 +1,8 @@
 # I2C Sensor Abstraction Layer
 
-This library allows you to use sensors like accelerometers, gyroscopes, and barometers in your [Particle](https://www.particle.io/) and [Arduino](https://www.arduino.cc/) projects, without knowing the intimate details about the actual device connected. Say goodbye to reading device data-sheets or learning complex I2C interactions.
+This library allows you to use sensors like accelerometers, gyroscopes, and barometers in your [Arduino](https://www.arduino.cc/) and [Particle](https://www.particle.io/) projects, without knowing the intimate details about the sensor chip. Say goodbye to reading device data-sheets or learning complex I2C interactions.
 
-Sensor functions always return [SI units](https://en.wikipedia.org/wiki/International_System_of_Units), so no extra conversions are required.
-
-Inspired by the awesome [i2cdevlib](https://github.com/jrowberg/i2cdevlib) library by Jeff Rowberg.
+Sensor functions always return [SI units](https://en.wikipedia.org/wiki/International_System_of_Units), so no extra conversions are required in most situations.
 
 ## Contents
 
@@ -141,12 +139,28 @@ The following I2C devices are currently supported by this library:
 
 ## Platforms
 
-This library has been tested on the following devices:
+### Confirmed Working
+
+This library has been tested on the following platforms and development boards:
+
+#### Atmel AVR
+
+- [Arduino Micro](https://www.arduino.cc/en/Main/ArduinoBoardMicro)
+
+#### Teensy
+
+- [Teensy 3.2 / 3.1](https://www.pjrc.com/teensy/teensy31.html)
+
+#### Particle
 
 - [Particle Core](https://docs.particle.io/datasheets/core-datasheet/)
 - [Particle Photon](https://docs.particle.io/datasheets/photon-datasheet/)
 
-There is a good chance this library will also work "out of the box" with Arduino devices. If you'd like to add support for a new platform, you can implement the underlying I2C functions for your platform, take a look in `src/platforms` for examples.
+### Other Devices
+
+There is a good chance this library will also work "out of the box" with most devices using an Arduino-based framework.
+
+If you'd like to add support for a new platform, you can implement the underlying I2C functions for your platform, take a look at  for examples.
 
 
 ## Contributing

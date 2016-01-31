@@ -1,4 +1,4 @@
-// Platform-specific I2C methods, for Arduino and Particle devices
+// Framework-specific I2C methods, for Arduino and Particle devices
 
 #if defined(ARDUINO) || defined(SPARK)
 
