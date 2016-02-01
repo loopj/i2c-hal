@@ -4,6 +4,10 @@
 #include "AK8963.h"
 #endif
 
+#ifdef AK8975_INSTALLED
+#include "AK8975.h"
+#endif
+
 #ifdef BMP085_INSTALLED
 #include "BMP085.h"
 #endif
@@ -19,6 +23,10 @@
 void Sensors::initialize() {
     #ifdef AK8963_INSTALLED
     AK8963::getInstance().initialize();
+    #endif
+
+    #ifdef AK8975_INSTALLED
+    AK8975::getInstance().initialize();
     #endif
 
     #ifdef BMP085_INSTALLED
@@ -61,6 +69,8 @@ Gyroscope *Sensors::getGyroscope() {
 Magnetometer *Sensors::getMagnetometer() {
     #if defined(AK8963_INSTALLED)
     return &AK8963::getInstance();
+    #elif defined(AK8975_INSTALLED)
+    return &AK8975::getInstance();
     #elif defined(HMC5883L_INSTALLED)
     return &HMC5883L::getInstance();
     #else
