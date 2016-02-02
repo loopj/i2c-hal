@@ -22,7 +22,7 @@ void printlnf(const char *format, ...) {
 
 void setup() {
     // Activate serial port (for debug printing)
-    Serial.begin(115200);
+    Serial.begin(9600);
 
     // Activate i2c
     Wire.begin();
