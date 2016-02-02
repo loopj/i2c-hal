@@ -149,14 +149,18 @@ This library has been tested on the following platforms and development boards:
 
 - [Arduino Micro](https://www.arduino.cc/en/Main/ArduinoBoardMicro)
 
-#### Teensy
-
-- [Teensy 3.2 / 3.1](https://www.pjrc.com/teensy/teensy31.html)
-
 #### Particle
 
 - [Particle Core](https://docs.particle.io/datasheets/core-datasheet/)
 - [Particle Photon](https://docs.particle.io/datasheets/photon-datasheet/)
+
+#### ESP8266
+
+- [ESP8266](https://en.wikipedia.org/wiki/ESP8266)
+
+#### Teensy
+
+- [Teensy 3.2 / 3.1](https://www.pjrc.com/teensy/teensy31.html)
 
 ### Other Devices
 
