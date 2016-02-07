@@ -37,8 +37,14 @@ Vector3 MPU6500::getAcceleration() {
     Vector3 acceleration;
 
     // Read raw acceleration data from device
+    uint8_t rawData[6];
+    readBytes(MPU6500_RA_ACCEL_XOUT_H, 6, rawData);
+
+    // Convert raw data into signed 16-bit data
     int16_t rawAccel[3];
-    readWords(MPU6500_RA_ACCEL_XOUT_H, 3, (uint16_t *)rawAccel);
+    rawAccel[0] = (int16_t)(((int16_t)rawData[0] << 8) | rawData[1]);
+    rawAccel[1] = (int16_t)(((int16_t)rawData[2] << 8) | rawData[3]);
+    rawAccel[2] = (int16_t)(((int16_t)rawData[4] << 8) | rawData[5]);
 
     // Apply accelerometer scale to get Gs, convert to m/s^2
     acceleration.x = (float)rawAccel[0]/accelScale * STANDARD_GRAVITY;
@@ -53,8 +59,14 @@ Vector3 MPU6500::getRotation() {
     Vector3 rotation;
 
     // Read raw rotation data from device
+    uint8_t rawData[6];
+    readBytes(MPU6500_RA_GYRO_XOUT_H, 6, rawData);
+
+    // Convert raw data into signed 16-bit data
     int16_t rawRotation[3];
-    readWords(MPU6500_RA_GYRO_XOUT_H, 3, (uint16_t *)rawRotation);
+    rawRotation[0] = (int16_t)(((int16_t)rawData[0] << 8) | rawData[1]);
+    rawRotation[1] = (int16_t)(((int16_t)rawData[2] << 8) | rawData[3]);
+    rawRotation[2] = (int16_t)(((int16_t)rawData[4] << 8) | rawData[5]);
 
     // Apply gyroscope scale to get deg/s, convert to rad/s
     rotation.x = (float)rawRotation[0]/gyroScale * M_PI/180.0;
