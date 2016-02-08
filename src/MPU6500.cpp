@@ -36,7 +36,7 @@ bool MPU6500::testConnection() {
 Vector3 MPU6500::getAcceleration() {
     Vector3 acceleration;
 
-    // Read raw acceleration data from device
+    // Convert raw data into signed 16-bit data
     int16_t rawAccel[3];
     readWords(MPU6500_RA_ACCEL_XOUT_H, 3, (uint16_t *)rawAccel);
 
@@ -52,7 +52,7 @@ Vector3 MPU6500::getAcceleration() {
 Vector3 MPU6500::getRotation() {
     Vector3 rotation;
 
-    // Read raw rotation data from device
+    // Convert raw data into signed 16-bit data
     int16_t rawRotation[3];
     readWords(MPU6500_RA_GYRO_XOUT_H, 3, (uint16_t *)rawRotation);
 

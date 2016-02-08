@@ -67,17 +67,17 @@ float BMP085::getTemperature() {
 
 // CAL registers
 void BMP085::loadCalibration() {
-    readWordSigned(BMP085_RA_CAL_AC1, &ac1);
-    readWordSigned(BMP085_RA_CAL_AC2, &ac2);
-    readWordSigned(BMP085_RA_CAL_AC3, &ac3);
+    readWord(BMP085_RA_CAL_AC1, (uint16_t *)(&ac1));
+    readWord(BMP085_RA_CAL_AC2, (uint16_t *)(&ac2));
+    readWord(BMP085_RA_CAL_AC3, (uint16_t *)(&ac3));
     readWord(BMP085_RA_CAL_AC4, &ac4);
     readWord(BMP085_RA_CAL_AC5, &ac5);
     readWord(BMP085_RA_CAL_AC6, &ac6);
-    readWordSigned(BMP085_RA_CAL_B1, &b1);
-    readWordSigned(BMP085_RA_CAL_B2, &b2);
-    readWordSigned(BMP085_RA_CAL_MB, &mb);
-    readWordSigned(BMP085_RA_CAL_MC, &mc);
-    readWordSigned(BMP085_RA_CAL_MD, &md);
+    readWord(BMP085_RA_CAL_B1, (uint16_t *)(&b1));
+    readWord(BMP085_RA_CAL_B2, (uint16_t *)(&b2));
+    readWord(BMP085_RA_CAL_MB, (uint16_t *)(&mb));
+    readWord(BMP085_RA_CAL_MC, (uint16_t *)(&mc));
+    readWord(BMP085_RA_CAL_MD, (uint16_t *)(&md));
 }
 
 // CHIPID register
@@ -111,7 +111,7 @@ int32_t BMP085::getRawTemperature() {
     usleep(4500);
 
     // Read the raw temperature data;
-    readWordSigned(BMP085_RA_DATA, &rawTemperature);
+    readWord(BMP085_RA_DATA, (uint16_t *)(&rawTemperature));
 
     return rawTemperature;
 }
