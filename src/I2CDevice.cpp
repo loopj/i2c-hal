@@ -26,6 +26,21 @@ bool I2CDevice::readByte(uint8_t regAddr, uint8_t *data) {
     return readBytes(regAddr, 1, data);
 }
 
+bool I2CDevice::readWord(uint8_t regAddr, uint16_t *data) {
+    return readWords(regAddr, 1, data);
+}
+
+bool I2CDevice::readWords(uint8_t regAddr, uint8_t length, uint16_t *data) {
+    uint8_t temp[length*2];
+    bool status = readBytes(regAddr, length*2, temp);
+
+    for(int i=0; i<length; i++) {
+        data[i] = (temp[i*2] << 8) | temp[i*2 + 1];
+    }
+
+    return status;
+}
+
 bool I2CDevice::writeBit(uint8_t regAddr, uint8_t bitNum, uint8_t data) {
     uint8_t b;
     readByte(regAddr, &b);

@@ -16,6 +16,8 @@ protected:
     bool readBits(uint8_t regAddr, uint8_t bitNum, uint8_t length, uint8_t *data);
     bool readByte(uint8_t regAddr, uint8_t *data);
     bool readBytes(uint8_t regAddr, uint8_t length, uint8_t *data);
+    bool readWord(uint8_t regAddr, uint16_t *data);
+    bool readWords(uint8_t regAddr, uint8_t length, uint16_t *data);
 
     // Write data to the specified I2C register on this device
     bool writeBit(uint8_t regAddr, uint8_t bitNum, uint8_t data);

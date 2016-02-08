@@ -11,8 +11,6 @@ void printFloat(float flt, int precision=2) {
 }
 
 int main() {
-    // TODO: Set i2c speed somehow
-
     // Initialize devices
     Sensors::initialize();
 
