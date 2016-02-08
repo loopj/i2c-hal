@@ -1,28 +1,70 @@
 #include "mbed.h"
 #include "USBSerial.h"
 
-I2C i2c(I2C_SDA, I2C_SCL);
+#include "Sensors.h"
+
 USBSerial serial;
 
-char readByte(uint8_t address, uint8_t subAddress) {
-    char data[1]; // `data` will store the register data
-    char data_write[1];
-    data_write[0] = subAddress;
-    i2c.write(address, data_write, 1, 1); // no stop
-    i2c.read(address, data, 1, 0);
-    return data[0];
+// Quick and dirty way to print floats
+void printFloat(float flt, int precision=2) {
+    serial.printf("%d.%d", (int)flt, abs((int)((flt - (int)flt) * pow(10,precision))));
 }
 
 int main() {
-    wait_ms(5000);
+    // TODO: Set i2c speed somehow
+
+    // Initialize devices
+    Sensors::initialize();
 
     while(1) {
-        uint8_t raxh = readByte(0x68, 0x13);
-        uint8_t raxl = readByte(0x68, 0x14);
+        Accelerometer *accelerometer = Sensors::getAccelerometer();
+        if(accelerometer) {
+            Vector3 a = accelerometer->getAcceleration();
+            serial.printf("Acceleration (m/s^2)  ");
+            printFloat(a.x); serial.printf(", ");
+            printFloat(a.y); serial.printf(", ");
+            printFloat(a.z); serial.printf("\n");
+        }
 
-        int16_t rawAccel = (int16_t)(((int16_t)raxh << 8) | raxl);
+        Barometer *barometer = Sensors::getBarometer();
+        if(barometer) {
+            float p = barometer->getPressure();
+            serial.printf("Pressure (hPa)        ");
+            printFloat(p); serial.printf("\n");
 
-        serial.printf("rax: %d\n", rawAccel);
+            float a = barometer->getAltitude();
+            serial.printf("Altitude (m)          ");
+            printFloat(a); serial.printf("\n");
+        }
+
+        Gyroscope *gyroscope = Sensors::getGyroscope();
+        if(gyroscope) {
+            Vector3 g = gyroscope->getRotation();
+            serial.printf("Rotation (rad/s)      ");
+            printFloat(g.x); serial.printf(", ");
+            printFloat(g.y); serial.printf(", ");
+            printFloat(g.z); serial.printf("\n");
+        }
+
+        Magnetometer *magnetometer = Sensors::getMagnetometer();
+        if(magnetometer) {
+            Vector3 m = magnetometer->getMagneticField();
+            serial.printf("Magnetic Field (uT)   ");
+            printFloat(m.x); serial.printf(", ");
+            printFloat(m.y); serial.printf(", ");
+            printFloat(m.z); serial.printf("\n");
+
+            float azimuth = magnetometer->getAzimuth();
+            serial.printf("Azimuth (deg)         ");
+            printFloat(azimuth); serial.printf("\n");
+        }
+
+        Thermometer *thermometer = Sensors::getThermometer();
+        if(thermometer) {
+            float t = thermometer->getTemperature();
+            serial.printf("Temperature (C)       ");
+            printFloat(t); serial.printf("\n");
+        }
 
         wait_ms(50);
     }

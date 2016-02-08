@@ -1,11 +1,6 @@
 #include "Wire.h"
 
-#include "Accelerometer.h"
-#include "Barometer.h"
-#include "Gyroscope.h"
-#include "Magnetometer.h"
 #include "Sensors.h"
-#include "Vector3.h"
 
 void setup() {
     // Activate serial port (for debug printing)
