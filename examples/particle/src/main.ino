@@ -1,30 +1,11 @@
-#include "Arduino.h"
-#include "Wire.h"
-
-#include "Accelerometer.h"
-#include "Barometer.h"
-#include "Gyroscope.h"
-#include "Magnetometer.h"
 #include "Sensors.h"
-#include "Vector3.h"
-
-// Serial.printlnf
-// Requires compile flags: -Wl,-u,vfprintf -lprintf_flt
-void printlnf(const char *format, ...) {
-    char buf[255];
-    va_list args;
-    va_start(args, format);
-    vsnprintf(buf, sizeof(buf), format, args);
-    va_end(args);
-
-    Serial.println(buf);
-}
 
 void setup() {
     // Activate serial port (for debug printing)
-    Serial.begin(9600);
+    Serial.begin(115200);
 
-    // Activate i2c
+    // Activate high-speed i2c
+    Wire.setSpeed(CLOCK_SPEED_400KHZ);
     Wire.begin();
 
     // Initialize devices
@@ -35,37 +16,37 @@ void loop() {
     Accelerometer *accelerometer = Sensors::getAccelerometer();
     if(accelerometer) {
         Vector3 a = accelerometer->getAcceleration();
-        printlnf("Acceleration (m/s^2)  %+7.3f, %+7.3f, %+7.3f", a.x, a.y, a.z);
+        Serial.printlnf("Acceleration (m/s^2)  %+7.3f, %+7.3f, %+7.3f", a.x, a.y, a.z);
     }
 
     Barometer *barometer = Sensors::getBarometer();
     if(barometer) {
         float p = barometer->getPressure();
-        printlnf("Pressure (hPa)        %f", p);
+        Serial.printlnf("Pressure (hPa)        %+7.3f", p);
 
         float a = barometer->getAltitude();
-        printlnf("Altitude (m)          %+7.3f", a);
+        Serial.printlnf("Altitude (m)          %+7.3f", a);
     }
 
     Gyroscope *gyroscope = Sensors::getGyroscope();
     if(gyroscope) {
         Vector3 g = gyroscope->getRotation();
-        printlnf("Rotation (rad/s)      %+7.3f, %+7.3f, %+7.3f", g.x, g.y, g.z);
+        Serial.printlnf("Rotation (rad/s)      %+7.3f, %+7.3f, %+7.3f", g.x, g.y, g.z);
     }
 
     Magnetometer *magnetometer = Sensors::getMagnetometer();
     if(magnetometer) {
         Vector3 m = magnetometer->getMagneticField();
-        printlnf("Magnetic Field (uT)   %+7.3f, %+7.3f, %+7.3f", m.x, m.y, m.z);
+        Serial.printlnf("Magnetic Field (uT)   %+7.3f, %+7.3f, %+7.3f", m.x, m.y, m.z);
 
         float azimuth = magnetometer->getAzimuth();
-        printlnf("Azimuth (deg)         %+7.3f", azimuth);
+        Serial.printlnf("Azimuth (deg)         %+7.3f", azimuth);
     }
 
     Thermometer *thermometer = Sensors::getThermometer();
     if(thermometer) {
         float t = thermometer->getTemperature();
-        printlnf("Temperature (C)       %+7.3f", t);
+        Serial.printlnf("Temperature (C)       %+7.3f", t);
     }
 
     delay(50);
