@@ -15,15 +15,15 @@ I2CDevice::I2CDevice(uint8_t address) : address(address) {
 }
 
 bool I2CDevice::readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
-    i2c_smbus_read_i2c_block_data(handle, regAddr, length, data);
+    uint8_t count = i2c_smbus_read_i2c_block_data(handle, regAddr, length, data);
 
-    return true;
+    return (count == length);
 }
 
 bool I2CDevice::writeBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
-    i2c_smbus_write_i2c_block_data(handle, regAddr, length, data);
+    uint8_t count = i2c_smbus_write_i2c_block_data(handle, regAddr, length, data);
 
-    return true;
+    return (count == length);
 }
 
 void I2CDevice::usleep(unsigned int us) {
