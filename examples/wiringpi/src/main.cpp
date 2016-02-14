@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <wiringPi.h>
 
 #include "Sensors.h"
