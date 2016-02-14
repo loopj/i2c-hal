@@ -6,6 +6,7 @@
 
 // Initialization
 BMP085::BMP085() {
+    this->oss = 0;
     this->address = BMP085_ADDRESS;
 }
 
