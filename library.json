@@ -7,6 +7,6 @@
         "type": "git",
         "url": "https://github.com/loopj/i2c-sensor-hal.git"
     },
-    "frameworks": ["arduino", "mbed"],
-    "platforms": ["atmelavr", "espressif", "teensy"]
+    "frameworks": ["arduino", "mbed", "wiringpi"],
+    "platforms": ["atmelavr", "espressif", "teensy", "linux_arm"]
 }

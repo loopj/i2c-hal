@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/loopj/i2c-sensor-hal.svg?branch=master)](https://travis-ci.org/loopj/i2c-sensor-hal)
 
-This library allows you to use sensors like accelerometers, gyroscopes, and barometers in your [Arduino](https://www.arduino.cc/), [mbed](https://www.mbed.com) and [Particle](https://www.particle.io/) projects, without knowing the intimate details about the sensor chip. Say goodbye to reading device data-sheets or learning complex I2C interactions.
+This library allows you to use sensors like accelerometers, gyroscopes, and barometers in your [Arduino](https://www.arduino.cc/), [mbed](https://www.mbed.com), [Particle](https://www.particle.io/) and [Raspberry Pi](https://www.raspberrypi.org/) projects, without knowing the intimate details about the sensor chip. Say goodbye to reading device data-sheets or learning complex I2C interactions.
 
 Sensor functions always return [SI units](https://en.wikipedia.org/wiki/International_System_of_Units), so no extra conversions are required in most situations.
 
@@ -158,15 +158,21 @@ This library has been tested on the following platforms and development boards:
 
 - [ESP8266](https://en.wikipedia.org/wiki/ESP8266)
 
+#### Raspberry Pi
+
+- [Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
+
 #### Teensy
 
 - [Teensy 3.2 / 3.1](https://www.pjrc.com/teensy/teensy31.html)
 
 ### Other Devices
 
-There is a good chance this library will also work "out of the box" with most devices running on the Arduino or mbed frameworks.
+There is a good chance this library will also work "out of the box" with most devices running on the Arduino, mbed or Raspberry Pi (WiringPi) frameworks.
 
-If you'd like to add support for a new platform, you can implement the underlying I2C functions for your platform, take a look at  for examples.
+If you test a new device and can confirm it works, please let me know in [an issue](https://github.com/loopj/i2cdevlib-hal/issues) and I'll update this documentation.
+
+If you'd like to add support for a new development framework, it is relatively simple to implement the underlying I2C functions for your framework. Take a look at [`I2CDevice_arduino.cpp`](https://github.com/loopj/i2c-sensor-hal/blob/master/src/I2CDevice_arduino.cpp) for an example, and feel free to make a pull request for a new framework or platform.
 
 
 ## Contributing
