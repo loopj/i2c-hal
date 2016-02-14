@@ -1,5 +1,7 @@
 #include "Magnetometer.h"
 
+const float Magnetometer::GAUSS_TO_MICROTESLA = 100.0f;
+
 float Magnetometer::getAzimuth(float declination) {
     // Get the magnetic field vector from the device, in uT
     Vector3 magneticField = getMagneticField();
