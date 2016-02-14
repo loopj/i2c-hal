@@ -5,9 +5,7 @@
 #include "AK8963.h"
 
 // Initialization
-AK8963::AK8963(uint8_t address) {
-    this->address = address;
-}
+AK8963::AK8963(uint8_t address) : I2CDevice(address) {}
 
 void AK8963::initialize() {
     // Fetch sensitivity adjustment values from the fuse-rom

@@ -6,7 +6,13 @@
 
 #include "I2CDevice.h"
 
+// I2C device handle (internal)
 I2C i2c(I2C_SDA, I2C_SCL);
+
+I2CDevice::I2CDevice(uint8_t address) : address(address) {
+    // Use high-speed i2c
+    i2c.frequency(400000);
+}
 
 bool I2CDevice::readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
     // Start the i2c transaction

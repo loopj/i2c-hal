@@ -13,6 +13,8 @@
 
 #include "I2CDevice.h"
 
+I2CDevice::I2CDevice(uint8_t address) : address(address) {}
+
 bool I2CDevice::readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
     uint8_t count = 0;
 

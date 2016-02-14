@@ -5,10 +5,7 @@
 #include "BMP085.h"
 
 // Initialization
-BMP085::BMP085() {
-    this->oss = 0;
-    this->address = BMP085_ADDRESS;
-}
+BMP085::BMP085() : I2CDevice(BMP085_ADDRESS), oss(0) {}
 
 void BMP085::initialize() {
     loadCalibration();

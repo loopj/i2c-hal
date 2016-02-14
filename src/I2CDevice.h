@@ -4,6 +4,9 @@
 
 class I2CDevice {
 public:
+    // Constructor
+    I2CDevice(uint8_t address);
+
     // Perform any required device initialization
     virtual void initialize() = 0;
 

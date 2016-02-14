@@ -5,9 +5,7 @@
 #include "MPU6500.h"
 
 // Initialization
-MPU6500::MPU6500(uint8_t address) {
-    this->address = address;
-}
+MPU6500::MPU6500(uint8_t address) : I2CDevice(address) {}
 
 void MPU6500::initialize() {
     // Wake up the device
