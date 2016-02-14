@@ -36,4 +36,7 @@ protected:
 
     // Convenient buffer for read operations
     uint8_t buffer[64];
+
+    // I2C device handle (internal)
+    int handle;
 };

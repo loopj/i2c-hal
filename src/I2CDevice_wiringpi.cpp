@@ -10,9 +10,6 @@
 
 #include "I2CDevice.h"
 
-// I2C device handle (internal)
-int handle;
-
 I2CDevice::I2CDevice(uint8_t address) : address(address) {
     handle = wiringPiI2CSetup(address);
 }
