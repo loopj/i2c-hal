@@ -10,7 +10,7 @@
 class Accelerometer {
 public:
     // Earth's gravity in m/s^2
-    static constexpr float STANDARD_GRAVITY = 9.80665F;
+    static const float STANDARD_GRAVITY;
 
     // Get the current acceleration vector, in m/s^2
     virtual Vector3 getAcceleration() = 0;

@@ -6,9 +6,7 @@
 #include "HMC5883L.h"
 
 // Initialization
-HMC5883L::HMC5883L() {
-    this->address = HMC5883L_ADDRESS;
-}
+HMC5883L::HMC5883L() : I2CDevice(HMC5883L_ADDRESS) {}
 
 void HMC5883L::initialize() {
     setMode(HMC5883L_MODE_CONTINUOUS);

@@ -4,6 +4,9 @@
 
 class I2CDevice {
 public:
+    // Constructor
+    I2CDevice(uint8_t address);
+
     // Perform any required device initialization
     virtual void initialize() = 0;
 
@@ -33,4 +36,7 @@ protected:
 
     // Convenient buffer for read operations
     uint8_t buffer[64];
+
+    // I2C device handle (internal)
+    int handle;
 };

@@ -81,7 +81,7 @@ protected:
     int16_t  b1, b2;
     int16_t  mb, mc, md;
 
-    uint8_t oss = 0;
+    uint8_t oss;
 
     int32_t computeB5(int32_t ut);
 };

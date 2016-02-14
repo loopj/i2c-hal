@@ -13,7 +13,7 @@
 class Magnetometer {
 public:
     // Gauss to microTesla multiplier
-    static constexpr float GAUSS_TO_MICROTESLA = 100.0;
+    static const float GAUSS_TO_MICROTESLA;
 
     // Get the current magnetic field vector, in μT
     virtual Vector3 getMagneticField() = 0;
