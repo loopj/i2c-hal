@@ -153,6 +153,7 @@ This library has been tested on the following platforms and development boards:
 
 - [Particle Core](https://docs.particle.io/datasheets/core-datasheet/)
 - [Particle Photon](https://docs.particle.io/datasheets/photon-datasheet/)
+- [Particle Electron](https://docs.particle.io/datasheets/electron-datasheet/)
 
 #### ESP8266
 
