@@ -21,7 +21,7 @@ Sensor functions always return [SI units](https://en.wikipedia.org/wiki/Internat
 First you'll need to define which [devices](#devices) are installed:
 
 ```c++
-#define SENSOR_ATTACHED_MPU6500
+#define SENSOR_ATTACHED_MPU6050
 #define SENSOR_ATTACHED_AK8963
 ```
 
@@ -132,10 +132,10 @@ The following I2C devices are currently supported by this library:
 - Magnetometer
 - `#define SENSOR_ATTACHED_HMC5883L`
 
-### MPU6500
+### MPU6050
 
 - Accelerometer, Gyroscope
-- `#define SENSOR_ATTACHED_MPU6500`
+- `#define SENSOR_ATTACHED_MPU6050`
 - Probably also compatible with MPU6050
 
 
