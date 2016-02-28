@@ -59,14 +59,7 @@ public:
     }
 
     bool testConnection() {
-        switch(getDeviceID()) {
-            case BMP085_DEVICE_ID:
-                return true;
-            case BMP180_DEVICE_ID:
-                return true;
-        }
-
-        return false;
+        return getDeviceID() == BMP085_DEVICE_ID;
     }
 
     // Barometer
