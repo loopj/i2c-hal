@@ -8,32 +8,77 @@ Sensor functions always return [SI units](https://en.wikipedia.org/wiki/Internat
 
 ## Contents
 
-- [Usage](#usage)
-- [Sensors](#sensors)
-- [Devices](#devices)
-- [Platforms](#platforms)
+- [Getting Started](#getting-started)
+- [Supported Devices](#supported-devices)
+- [Sensor Types](#sensor-types)
+  - [Accelerometer](#accelerometer)
+  - [Barometer](#barometer)
+  - [Gyroscope](#gyroscope)
+  - [Magnetometer](#magnetometer)
+  - [Thermometer](#thermometer)
+- [Platforms, Frameworks & Boards](#platforms)
 - [Contributing](#contributing)
 - [License](#license)
 
+## Getting Started
+
+### Installation
+
+#### Using PlatformIO
+
+```shell
+$ platformio lib install 578
+```
+
+#### Using the Arduino Library Manager
+
+Find `Sensors by James Smith` in the Library Manager and click install.
+
+#### Manual Installation
+
+If you can't use PlatformIO or Arduino Library Manager, you can always simply copy the library into your project or include it as a git submodule. This is the preferred approach for the Particle platform.
 
 ## Usage
 
-First you'll need to define which [devices](#devices) are installed:
+Once you've installed the library, you'll need to [define which sensor devices are installed](#supported-devices) and include `Sensors.h`:
 
 ```c++
 #define SENSOR_ATTACHED_MPU6050
 #define SENSOR_ATTACHED_BMP085
+#include <Sensors.h>
 ```
 
-Then you can use [sensors](#sensors) as follows:
+You'll then be able to use sensors as follows:
 
 ```c++
 Accelerometer *accelerometer = Sensors::getAccelerometer();
 Vector3 acceleration = accelerometer->getAcceleration();
 ```
 
+See the [sensor types](#sensor-types) section below for details on each sensor type, and check out the [example apps folder](https://github.com/loopj/i2c-sensor-hal/tree/master/examples) for some complete examples.
 
-## Sensors
+
+## Supported Devices
+
+The following I2C devices are currently supported by this library:
+
+| Device    | Provides Sensors                          | #define                   |
+|---------- |----------------------------------------   |-------------------------- |
+| AK8963    | Magnetometer                              | SENSOR_ATTACHED_AK8963    |
+| BMP085    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP085    |
+| BMP180    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP180    |
+| HMC5883L  | Magnetometer                              | SENSOR_ATTACHED_HMC5883L  |
+| MPU6050   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6050   |
+| MPU6500   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6500   |
+| MPU9150   | Accelerometer, Gyroscope, Magnetometer    | SENSOR_ATTACHED_MPU9150   |
+| MPU9250   | Accelerometer, Gyroscope, Magnetometer    | SENSOR_ATTACHED_MPU9250   |
+
+If you'd like to see another sensor device supported here, see the [contributing](#contributing) section below.
+
+
+## Sensor Types
+
+The following sensor types are currently supported by this library:
 
 ### Accelerometer
 
@@ -112,23 +157,7 @@ float temperature = thermometer->getTemperature();
 ```
 
 
-## Devices
-
-The following I2C devices are currently supported by this library:
-
-| Device    | Provides Sensors                          | #define                   |
-|---------- |----------------------------------------   |-------------------------- |
-| AK8963    | Magnetometer                              | SENSOR_ATTACHED_AK8963    |
-| BMP085    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP085    |
-| BMP180    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP180    |
-| HMC5883L  | Magnetometer                              | SENSOR_ATTACHED_HMC5883L  |
-| MPU6050   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6050   |
-| MPU6500   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6500   |
-| MPU9150   | Accelerometer, Gyroscope, Magnetometer    | SENSOR_ATTACHED_MPU9150   |
-| MPU9250   | Accelerometer, Gyroscope, Magnetometer    | SENSOR_ATTACHED_MPU9250   |
-
-
-## Platforms
+## Platforms, Frameworks & Boards
 
 This library supports almost every popular embedded platform, including the following development boards:
 
@@ -140,16 +169,12 @@ This library supports almost every popular embedded platform, including the foll
 | [Raspberry Pi][4] | Any board which support [WiringPi][8]
 | [Teensy][5]       | Any Teensy board
 
-### Other Devices
-
-If you test a new device and can confirm it works, please let me know in [an issue](https://github.com/loopj/i2cdevlib-hal/issues) and I'll update this documentation.
-
-If you'd like to add support for a new development framework, it is relatively simple to implement the underlying I2C functions for your framework. Take a look at [`I2CDevice_arduino.cpp`](https://github.com/loopj/i2c-sensor-hal/blob/master/src/I2CDevice_arduino.cpp) for an example, and feel free to make a pull request for a new framework or platform.
+If you test a new platform or development board and can confirm it works, please let me know in [an issue](https://github.com/loopj/i2cdevlib-hal/issues) and I'll update this documentation.
 
 
 ## Contributing
 
-We'd love you to file issues and send pull requests. The [contributing guidelines](CONTRIBUTING.md) details the process of building and testing this library, as well as the pull request process. Feel free to comment on [existing issues](https://github.com/loopj/i2cdevlib-hal/issues) for clarification or starting points.
+I'd love you to file issues and send pull requests. The [contributing guidelines](CONTRIBUTING.md) details the process of adding support for sensors, devices and frameworks, building and testing the library, as well as the pull request process. Feel free to comment on [existing issues](https://github.com/loopj/i2cdevlib-hal/issues) for clarification or starting points.
 
 
 ## License

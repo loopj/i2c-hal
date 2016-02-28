@@ -1,7 +1,5 @@
 // Define which sensors are attached
-#define SENSOR_ATTACHED_BMP085
-#define SENSOR_ATTACHED_HMC5883L
-#define SENSOR_ATTACHED_MPU6050
+#define SENSOR_ATTACHED_MPU9150
 
 #include <Sensors.h>
 
