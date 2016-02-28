@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/loopj/i2c-sensor-hal.svg?branch=master)](https://travis-ci.org/loopj/i2c-sensor-hal)
 
-This library allows you to use sensors like accelerometers, gyroscopes, and barometers in your [Arduino](https://www.arduino.cc/), [mbed](https://www.mbed.com), [Particle](https://www.particle.io/) and [Raspberry Pi](https://www.raspberrypi.org/) projects, without knowing the intimate details about the sensor chip. Say goodbye to reading device data-sheets or learning complex I2C interactions.
+This library allows you to use sensors like accelerometers, gyroscopes, and barometers in your [Arduino][1], [ESP8266][2], [Particle][3] and [Raspberry Pi][4] projects, without knowing the intimate details about the sensor chip. Say goodbye to reading device data-sheets or learning complex I2C interactions.
 
 Sensor functions always return [SI units](https://en.wikipedia.org/wiki/International_System_of_Units), so no extra conversions are required in most situations.
 
@@ -116,49 +116,31 @@ float temperature = thermometer->getTemperature();
 
 The following I2C devices are currently supported by this library:
 
-| Device   	| Provides Sensors                       	| #define                  	|
-|----------	|----------------------------------------	|--------------------------	|
-| AK8963   	| Magnetometer                           	| SENSOR_ATTACHED_AK8963   	|
-| BMP085   	| Barometer, Thermometer                 	| SENSOR_ATTACHED_BMP085   	|
-| BMP180   	| Barometer, Thermometer                 	| SENSOR_ATTACHED_BMP180   	|
-| HMC5883L 	| Magnetometer                           	| SENSOR_ATTACHED_HMC5883L 	|
-| MPU6050  	| Accelerometer, Gyroscope               	| SENSOR_ATTACHED_MPU6050  	|
-| MPU6500  	| Accelerometer, Gyroscope               	| SENSOR_ATTACHED_MPU6500  	|
-| MPU9150  	| Accelerometer, Gyroscope, Magnetometer 	| SENSOR_ATTACHED_MPU9150  	|
-| MPU9250  	| Accelerometer, Gyroscope, Magnetometer 	| SENSOR_ATTACHED_MPU9250  	|
+| Device    | Provides Sensors                          | #define                   |
+|---------- |----------------------------------------   |-------------------------- |
+| AK8963    | Magnetometer                              | SENSOR_ATTACHED_AK8963    |
+| BMP085    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP085    |
+| BMP180    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP180    |
+| HMC5883L  | Magnetometer                              | SENSOR_ATTACHED_HMC5883L  |
+| MPU6050   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6050   |
+| MPU6500   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6500   |
+| MPU9150   | Accelerometer, Gyroscope, Magnetometer    | SENSOR_ATTACHED_MPU9150   |
+| MPU9250   | Accelerometer, Gyroscope, Magnetometer    | SENSOR_ATTACHED_MPU9250   |
 
 
 ## Platforms
 
-### Confirmed Working
+This library supports almost every popular embedded platform, including the following development boards:
 
-This library has been tested on the following platforms and development boards:
-
-#### Atmel AVR
-
-- [Arduino Micro](https://www.arduino.cc/en/Main/ArduinoBoardMicro)
-
-#### Particle
-
-- [Particle Core](https://docs.particle.io/datasheets/core-datasheet/)
-- [Particle Photon](https://docs.particle.io/datasheets/photon-datasheet/)
-- [Particle Electron](https://docs.particle.io/datasheets/electron-datasheet/)
-
-#### ESP8266
-
-- [ESP8266](https://en.wikipedia.org/wiki/ESP8266)
-
-#### Raspberry Pi
-
-- [Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
-
-#### Teensy
-
-- [Teensy 3.2 / 3.1](https://www.pjrc.com/teensy/teensy31.html)
+| Platform          | Boards
+|-------------------|----------------------------------------------------------
+| [Arduino][1]      | Any [Atmel AVR based][6] Ardunio, or Arduino-like board
+| [ESP8266][2]      | Any [ESP8266 based][7] board
+| [Particle][3]     | Particle Core, Particle Photon, Particle Electron
+| [Raspberry Pi][4] | Any board which support [WiringPi][8]
+| [Teensy][5]       | Any Teensy board
 
 ### Other Devices
-
-There is a good chance this library will also work "out of the box" with most devices running on the Arduino, mbed or Raspberry Pi (WiringPi) frameworks.
 
 If you test a new device and can confirm it works, please let me know in [an issue](https://github.com/loopj/i2cdevlib-hal/issues) and I'll update this documentation.
 
@@ -173,3 +155,13 @@ We'd love you to file issues and send pull requests. The [contributing guideline
 ## License
 
 This library is free software released under the MIT License. See [LICENSE.txt](LICENSE.txt) for details.
+
+
+[1]: https://www.arduino.cc/
+[2]: https://en.wikipedia.org/wiki/ESP8266
+[3]: https://www.particle.io/
+[4]: https://www.raspberrypi.org/
+[5]: https://www.pjrc.com/teensy/
+[6]: http://platformio.org/#!/boards?filter%5Bplatform%5D=atmelavr
+[7]: http://platformio.org/#!/boards?filter%5Bplatform%5D=espressif
+[8]: http://wiringpi.com/
