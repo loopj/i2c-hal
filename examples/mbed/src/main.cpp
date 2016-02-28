@@ -1,7 +1,7 @@
 // Define which sensors are attached
-#define SENSOR_ATTACHED_BMP085
-#define SENSOR_ATTACHED_HMC5883L
-#define SENSOR_ATTACHED_MPU6050
+#define SENSORS_BMP085_ATTACHED
+#define SENSORS_HMC5883L_ATTACHED
+#define SENSORS_MPU6050_ATTACHED
 
 #include "mbed.h"
 #include "USBSerial.h"

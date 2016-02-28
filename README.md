@@ -49,8 +49,8 @@ If you can't use PlatformIO or Arduino Library Manager, you can always simply co
 Once you've installed the library, you'll need to [define which sensor devices are installed](#supported-devices) and include `Sensors.h`:
 
 ```c++
-#define SENSOR_ATTACHED_MPU6050
-#define SENSOR_ATTACHED_BMP085
+#define SENSORS_MPU6050_ATTACHED
+#define SENSORS_BMP085_ATTACHED
 #include <Sensors.h>
 ```
 
@@ -70,14 +70,14 @@ The following I2C devices are currently supported by this library:
 
 | Device    | Provides Sensors                          | #define
 |---------- |----------------------------------------   |--------------------------
-| AK8963    | Magnetometer                              | SENSOR_ATTACHED_AK8963
-| BMP085    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP085
-| BMP180    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP180
-| HMC5883L  | Magnetometer                              | SENSOR_ATTACHED_HMC5883L
-| MPU6050   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6050
-| MPU6500   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6500
-| MPU9150   | Accelerometer, Gyroscope, Magnetometer    | SENSOR_ATTACHED_MPU9150
-| MPU9250   | Accelerometer, Gyroscope, Magnetometer    | SENSOR_ATTACHED_MPU9250   |
+| AK8963    | Magnetometer                              | SENSORS_AK8963_ATTACHED
+| BMP085    | Barometer, Thermometer                    | SENSORS_BMP085_ATTACHED
+| BMP180    | Barometer, Thermometer                    | SENSORS_BMP180_ATTACHED
+| HMC5883L  | Magnetometer                              | SENSORS_HMC5883L_ATTACHED
+| MPU6050   | Accelerometer, Gyroscope                  | SENSORS_MPU6050_ATTACHED
+| MPU6500   | Accelerometer, Gyroscope                  | SENSORS_MPU6500_ATTACHED
+| MPU9150   | Accelerometer, Gyroscope, Magnetometer    | SENSORS_MPU9150_ATTACHED
+| MPU9250   | Accelerometer, Gyroscope, Magnetometer    | SENSORS_MPU9250_ATTACHED
 
 If you'd like to see another sensor device supported here, see the [contributing](#contributing) section below.
 

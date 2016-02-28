@@ -1,5 +1,5 @@
 // Define which sensors are attached
-#define SENSOR_ATTACHED_BMP085
+#define SENSORS_BMP085_ATTACHED
 
 // Debug printing
 #define BLYNK_PRINT Serial

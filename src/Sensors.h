@@ -8,47 +8,47 @@
 
 // MPU9150 Accelerometer, Gyroscope and Magnetometer
 // The MPU9150 combines an MPU6050 and AK8975 in one chip
-#ifdef SENSOR_ATTACHED_MPU9150
-    #define SENSOR_ATTACHED_MPU6050
-    #define SENSOR_ATTACHED_AK8975
+#ifdef SENSORS_MPU9150_ATTACHED
+    #define SENSORS_MPU6050_ATTACHED
+    #define SENSORS_AK8975_ATTACHED
 #endif
 
 // MPU9250 Accelerometer, Gyroscope and Magnetometer
 // The MPU9250 combines an MPU6500 and AK8963 in one chip
-#ifdef SENSOR_ATTACHED_MPU9250
-    #define SENSOR_ATTACHED_MPU6500
-    #define SENSOR_ATTACHED_AK8963
+#ifdef SENSORS_MPU9250_ATTACHED
+    #define SENSORS_MPU6500_ATTACHED
+    #define SENSORS_AK8963_ATTACHED
 #endif
 
 // MPU6500 Accelerometer and Gyroscope
 // The MPU6500 is both supported by the MPU6050 driver
-#ifdef SENSOR_ATTACHED_MPU6500
-    #define SENSOR_ATTACHED_MPU6050
+#ifdef SENSORS_MPU6500_ATTACHED
+    #define SENSORS_MPU6050_ATTACHED
 #endif
 
 // BMP180 Barometer and Thermometer
 // The BMP180 is supported by the BMP085 driver
-#ifdef SENSOR_ATTACHED_BMP180
-    #define SENSOR_ATTACHED_BMP085
+#ifdef SENSORS_BMP180_ATTACHED
+    #define SENSORS_BMP085_ATTACHED
 #endif
 
 // AK8963 Magnetometer
-#ifdef SENSOR_ATTACHED_AK8963
+#ifdef SENSORS_AK8963_ATTACHED
     #include "AK8963.h"
 #endif
 
 // BMP085 Barometer and Thermometer
-#ifdef SENSOR_ATTACHED_BMP085
+#ifdef SENSORS_BMP085_ATTACHED
     #include "BMP085.h"
 #endif
 
 // HMC5883L Magnetometer
-#ifdef SENSOR_ATTACHED_HMC5883L
+#ifdef SENSORS_HMC5883L_ATTACHED
     #include "HMC5883L.h"
 #endif
 
 // MPU6050 Accelerometer and Gyroscope
-#ifdef SENSOR_ATTACHED_MPU6050
+#ifdef SENSORS_MPU6050_ATTACHED
     #include "MPU6050.h"
 #endif
 
@@ -57,25 +57,25 @@ public:
     // Initialize attached sensors
     // Only call this after enabling and waking up the I2C bus
     static void initialize() {
-        #ifdef SENSOR_ATTACHED_AK8963
+        #ifdef SENSORS_AK8963_ATTACHED
         AK8963::getInstance().initialize();
         #endif
 
-        #ifdef SENSOR_ATTACHED_BMP085
+        #ifdef SENSORS_BMP085_ATTACHED
         BMP085::getInstance().initialize();
         #endif
 
-        #ifdef SENSOR_ATTACHED_HMC5883L
+        #ifdef SENSORS_HMC5883L_ATTACHED
         HMC5883L::getInstance().initialize();
         #endif
 
-        #ifdef SENSOR_ATTACHED_MPU6050
+        #ifdef SENSORS_MPU6050_ATTACHED
         MPU6050::getInstance().initialize();
         #endif
     }
 
     static Accelerometer *getAccelerometer() {
-        #ifdef SENSOR_ATTACHED_MPU6050
+        #ifdef SENSORS_MPU6050_ATTACHED
         return &MPU6050::getInstance();
         #else
         return NULL;
@@ -83,7 +83,7 @@ public:
     }
 
     static Barometer *getBarometer() {
-        #ifdef SENSOR_ATTACHED_BMP085
+        #ifdef SENSORS_BMP085_ATTACHED
         return &BMP085::getInstance();
         #else
         return NULL;
@@ -91,7 +91,7 @@ public:
     }
 
     static Gyroscope *getGyroscope() {
-        #ifdef SENSOR_ATTACHED_MPU6050
+        #ifdef SENSORS_MPU6050_ATTACHED
         return &MPU6050::getInstance();
         #else
         return NULL;
@@ -99,9 +99,9 @@ public:
     }
 
     static Magnetometer *getMagnetometer() {
-        #if defined(SENSOR_ATTACHED_AK8963)
+        #if defined(SENSORS_AK8963_ATTACHED)
         return &AK8963::getInstance();
-        #elif defined(SENSOR_ATTACHED_HMC5883L)
+        #elif defined(SENSORS_HMC5883L_ATTACHED)
         return &HMC5883L::getInstance();
         #else
         return NULL;
@@ -109,7 +109,7 @@ public:
     }
 
     static Thermometer *getThermometer() {
-        #ifdef SENSOR_ATTACHED_BMP085
+        #ifdef SENSORS_BMP085_ATTACHED
         return &BMP085::getInstance();
         #else
         return NULL;

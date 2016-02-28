@@ -1,5 +1,5 @@
 // Define which sensors are attached
-#define SENSOR_ATTACHED_MPU9150
+#define SENSORS_MPU9150_ATTACHED
 
 #include <Sensors.h>
 
