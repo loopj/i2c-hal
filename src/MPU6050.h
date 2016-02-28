@@ -102,16 +102,12 @@ public:
     bool testConnection() {
         switch(getDeviceID()) {
             case MPU6050_DEVICE_ID:
-                Serial.println("Detected a MPU6050");
                 return true;
             case MPU6500_DEVICE_ID:
-                Serial.println("Detected a MPU6500");
                 return true;
             case MPU9150_DEVICE_ID:
-                Serial.println("Detected a MPU9150");
                 return true;
             case MPU9250_DEVICE_ID:
-                Serial.println("Detected a MPU9250");
                 return true;
         }
 
