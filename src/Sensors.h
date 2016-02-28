@@ -6,44 +6,44 @@
 #include "Magnetometer.h"
 #include "Thermometer.h"
 
-#ifdef AK8963_INSTALLED
+#ifdef SENSOR_ATTACHED_AK8963
 #include "AK8963.h"
 #endif
 
-#ifdef BMP085_INSTALLED
+#ifdef SENSOR_ATTACHED_BMP085
 #include "BMP085.h"
 #endif
 
-#ifdef HMC5883L_INSTALLED
+#ifdef SENSOR_ATTACHED_HMC5883L
 #include "HMC5883L.h"
 #endif
 
-#ifdef MPU6500_INSTALLED
+#ifdef SENSOR_ATTACHED_MPU6500
 #include "MPU6500.h"
 #endif
 
 class Sensors {
 public:
     static void initialize() {
-        #ifdef AK8963_INSTALLED
+        #ifdef SENSOR_ATTACHED_AK8963
         AK8963::getInstance().initialize();
         #endif
 
-        #ifdef BMP085_INSTALLED
+        #ifdef SENSOR_ATTACHED_BMP085
         BMP085::getInstance().initialize();
         #endif
 
-        #ifdef HMC5883L_INSTALLED
+        #ifdef SENSOR_ATTACHED_HMC5883L
         HMC5883L::getInstance().initialize();
         #endif
 
-        #ifdef MPU6500_INSTALLED
+        #ifdef SENSOR_ATTACHED_MPU6500
         MPU6500::getInstance().initialize();
         #endif
     }
 
     static Accelerometer *getAccelerometer() {
-        #if defined(MPU6500_INSTALLED)
+        #if defined(SENSOR_ATTACHED_MPU6500)
         return &MPU6500::getInstance();
         #else
         return NULL;
@@ -51,7 +51,7 @@ public:
     }
 
     static Barometer *getBarometer() {
-        #if defined(BMP085_INSTALLED)
+        #if defined(SENSOR_ATTACHED_BMP085)
         return &BMP085::getInstance();
         #else
         return NULL;
@@ -59,7 +59,7 @@ public:
     }
 
     static Gyroscope *getGyroscope() {
-        #if defined(MPU6500_INSTALLED)
+        #if defined(SENSOR_ATTACHED_MPU6500)
         return &MPU6500::getInstance();
         #else
         return NULL;
@@ -67,9 +67,9 @@ public:
     }
 
     static Magnetometer *getMagnetometer() {
-        #if defined(AK8963_INSTALLED)
+        #if defined(SENSOR_ATTACHED_AK8963)
         return &AK8963::getInstance();
-        #elif defined(HMC5883L_INSTALLED)
+        #elif defined(SENSOR_ATTACHED_HMC5883L)
         return &HMC5883L::getInstance();
         #else
         return NULL;
@@ -77,7 +77,7 @@ public:
     }
 
     static Thermometer *getThermometer() {
-        #if defined(BMP085_INSTALLED)
+        #if defined(SENSOR_ATTACHED_BMP085)
         return &BMP085::getInstance();
         #else
         return NULL;

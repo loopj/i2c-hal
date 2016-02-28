@@ -1,7 +1,5 @@
 #pragma once
 
-#ifdef MPU6500_INSTALLED
-
 #include <stdint.h>
 
 #include "Accelerometer.h"
@@ -306,5 +304,3 @@ protected:
         return 2048.0 * pow(2, 3 - accelRange);
     }
 };
-
-#endif // MPU6500_INSTALLED

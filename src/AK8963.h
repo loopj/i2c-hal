@@ -1,7 +1,5 @@
 #pragma once
 
-#ifdef AK8963_INSTALLED
-
 #include "I2CDevice.h"
 #include "Magnetometer.h"
 #include "Vector3.h"
@@ -207,5 +205,3 @@ protected:
         return ((asa + 128.0) / 256.0) * resScale;
     }
 };
-
-#endif // AK8963_INSTALLED

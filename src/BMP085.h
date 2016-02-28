@@ -1,7 +1,5 @@
 #pragma once
 
-#ifdef BMP085_INSTALLED
-
 #include "I2CDevice.h"
 #include "Barometer.h"
 #include "Thermometer.h"
@@ -200,5 +198,3 @@ protected:
         return x1 + x2;
     }
 };
-
-#endif // BMP085_INSTALLED

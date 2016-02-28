@@ -21,8 +21,8 @@ Sensor functions always return [SI units](https://en.wikipedia.org/wiki/Internat
 First you'll need to define which [devices](#devices) are installed:
 
 ```c++
-#define MPU6500_INSTALLED
-#define AK8963_INSTALLED
+#define SENSOR_ATTACHED_MPU6500
+#define SENSOR_ATTACHED_AK8963
 ```
 
 Then you can use [sensors](#sensors) as follows:
@@ -119,23 +119,23 @@ The following I2C devices are currently supported by this library:
 ### AK8963
 
 - Magnetometer
-- `#define AK8963_INSTALLED`
+- `#define SENSOR_ATTACHED_AK8963`
 
 ### BMP085
 
 - Barometer, Thermometer
-- `#define BMP085_INSTALLED`
+- `#define SENSOR_ATTACHED_BMP085`
 - Probably also compatible with BMP180
 
 ### HMC5883L
 
 - Magnetometer
-- `#define HMC5883L_INSTALLED`
+- `#define SENSOR_ATTACHED_HMC5883L`
 
 ### MPU6500
 
 - Accelerometer, Gyroscope
-- `#define MPU6500_INSTALLED`
+- `#define SENSOR_ATTACHED_MPU6500`
 - Probably also compatible with MPU6050
 
 

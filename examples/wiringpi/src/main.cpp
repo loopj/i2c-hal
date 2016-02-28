@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <wiringPi.h>
 
+// Define which sensors are attached
+#define SENSOR_ATTACHED_BMP085
+#define SENSOR_ATTACHED_HMC5883L
+#define SENSOR_ATTACHED_MPU6500
+
 #include "Sensors.h"
 
 int main() {

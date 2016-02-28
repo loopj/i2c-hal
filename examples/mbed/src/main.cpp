@@ -2,9 +2,9 @@
 #include "USBSerial.h"
 
 // Define which sensors are attached
-#define BMP085_INSTALLED
-#define HMC5883L_INSTALLED
-#define MPU6500_INSTALLED
+#define SENSOR_ATTACHED_BMP085
+#define SENSOR_ATTACHED_HMC5883L
+#define SENSOR_ATTACHED_MPU6500
 
 #include "Sensors.h"
 

@@ -1,7 +1,5 @@
 #pragma once
 
-#ifdef HMC5883L_INSTALLED
-
 #include <string.h>
 
 #include "I2CDevice.h"
@@ -221,5 +219,3 @@ protected:
         }
     }
 };
-
-#endif // HMC5883L_INSTALLED

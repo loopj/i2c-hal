@@ -1,8 +1,5 @@
-// REMOVE AFTER ESP8266/Arduinio 2.1 RELEASE
-#include "esp8266fix.h"
-
 // Define which sensors are attached
-#define BMP085_INSTALLED
+#define SENSOR_ATTACHED_BMP085
 
 // Debug printing
 #define BLYNK_PRINT Serial
