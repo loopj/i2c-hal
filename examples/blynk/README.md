@@ -20,11 +20,11 @@ python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/
 
 ```c++
 // Blynk auth token (from the blynk app)
-char blynkToken[] = "13efc9ffb16b40ae97f6b2f7726358bd";
+char blynkToken[] = "13efc9ffb16b40ae97f6b2f7726358be";
 
 // WiFi access point credentials
-char ssid[] = "cosmos";
-char password[] = "ramt9OXq";
+char ssid[] = "my-wifi-network";
+char password[] = "p455w0rd";
 ```
 
 ## Build and upload to ESP8266

@@ -1,4 +1,7 @@
-#include "Sensors.h"
+// Define which sensors are attached
+#define SENSOR_ATTACHED_MPU9150
+
+#include <Sensors.h>
 
 void setup() {
     // Activate serial port (for debug printing)

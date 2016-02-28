@@ -2,38 +2,89 @@
 
 [![Build Status](https://travis-ci.org/loopj/i2c-sensor-hal.svg?branch=master)](https://travis-ci.org/loopj/i2c-sensor-hal)
 
-This library allows you to use sensors like accelerometers, gyroscopes, and barometers in your [Arduino](https://www.arduino.cc/), [mbed](https://www.mbed.com), [Particle](https://www.particle.io/) and [Raspberry Pi](https://www.raspberrypi.org/) projects, without knowing the intimate details about the sensor chip. Say goodbye to reading device data-sheets or learning complex I2C interactions.
+This library allows you to use sensors like accelerometers, gyroscopes, and barometers in your [Arduino][1], [ESP8266][2], [mbed][9], [Particle][3] and [Raspberry Pi][4] projects, without knowing the intimate details about the sensor chip. Say goodbye to reading device data-sheets or learning complex I2C interactions.
+
+Prototype on Arduino or Particle and use the same code when moving to production.
 
 Sensor functions always return [SI units](https://en.wikipedia.org/wiki/International_System_of_Units), so no extra conversions are required in most situations.
 
 ## Contents
 
-- [Usage](#usage)
-- [Sensors](#sensors)
-- [Devices](#devices)
-- [Platforms](#platforms)
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Usage](#usage)
+- [Supported Devices](#supported-devices)
+- [Sensor Types](#sensor-types)
+  - [Accelerometer](#accelerometer)
+  - [Barometer](#barometer)
+  - [Gyroscope](#gyroscope)
+  - [Magnetometer](#magnetometer)
+  - [Thermometer](#thermometer)
+- [Platforms, Frameworks & Boards](#platforms-frameworks--boards)
 - [Contributing](#contributing)
 - [License](#license)
 
+## Getting Started
+
+### Installation
+
+#### Using PlatformIO
+
+The recommended way to use this library is with [PlatformIO](http://platformio.org/):
+
+```shell
+$ platformio lib install 578
+```
+
+#### Using the Arduino Library Manager
+
+If you are using the Arduino IDE, find `Sensors` by James Smith in the Library Manager and click install.
+
+#### Manual Installation
+
+If you can't use PlatformIO or Arduino Library Manager, you can always simply copy the library into your project or include it as a git submodule. This is the preferred approach for the Particle platform, as you can see in the [particle example app ](https://github.com/loopj/i2c-sensor-hal/tree/master/examples/particle).
 
 ## Usage
 
-First you'll need to define which [devices](#devices) are installed:
+Once you've installed the library, you'll need to [define which sensor devices are installed](#supported-devices) and include `Sensors.h`:
 
 ```c++
-#define MPU6500_INSTALLED
-#define AK8963_INSTALLED
+#define SENSOR_ATTACHED_MPU6050
+#define SENSOR_ATTACHED_BMP085
+#include <Sensors.h>
 ```
 
-Then you can use [sensors](#sensors) as follows:
+You'll then be able to use sensors as follows:
 
 ```c++
 Accelerometer *accelerometer = Sensors::getAccelerometer();
 Vector3 acceleration = accelerometer->getAcceleration();
 ```
 
+See the [sensor types](#sensor-types) section below for details on each sensor type, and check out the [example apps folder](https://github.com/loopj/i2c-sensor-hal/tree/master/examples) for some complete examples.
 
-## Sensors
+
+## Supported Devices
+
+The following I2C devices are currently supported by this library:
+
+| Device    | Provides Sensors                          | #define                   |
+|---------- |----------------------------------------   |-------------------------- |
+| AK8963    | Magnetometer                              | SENSOR_ATTACHED_AK8963    |
+| BMP085    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP085    |
+| BMP180    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP180    |
+| HMC5883L  | Magnetometer                              | SENSOR_ATTACHED_HMC5883L  |
+| MPU6050   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6050   |
+| MPU6500   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6500   |
+| MPU9150   | Accelerometer, Gyroscope, Magnetometer    | SENSOR_ATTACHED_MPU9150   |
+| MPU9250   | Accelerometer, Gyroscope, Magnetometer    | SENSOR_ATTACHED_MPU9250   |
+
+If you'd like to see another sensor device supported here, see the [contributing](#contributing) section below.
+
+
+## Sensor Types
+
+The following sensor types are currently supported by this library:
 
 ### Accelerometer
 
@@ -112,75 +163,38 @@ float temperature = thermometer->getTemperature();
 ```
 
 
-## Devices
+## Platforms, Frameworks & Boards
 
-The following I2C devices are currently supported by this library:
+This library supports almost every popular embedded platform, including the following development boards:
 
-### AK8963
+| Platform          | Boards
+|-------------------|----------------------------------------------------------
+| [Arduino][1]      | Any [Atmel AVR based][6] Ardunio, or Arduino-like board
+| [ESP8266][2]      | Any [ESP8266 based][7] board
+| [mbed][9]         | Most boards using the ARM mbed framework
+| [Particle][3]     | Particle Core, Particle Photon, Particle Electron
+| [Raspberry Pi][4] | Any board which support [WiringPi][8]
+| [Teensy][5]       | Any Teensy board
 
-- Magnetometer
-- `#define AK8963_INSTALLED`
-
-### BMP085
-
-- Barometer, Thermometer
-- `#define BMP085_INSTALLED`
-- Probably also compatible with BMP180
-
-### HMC5883L
-
-- Magnetometer
-- `#define HMC5883L_INSTALLED`
-
-### MPU6500
-
-- Accelerometer, Gyroscope
-- `#define MPU6500_INSTALLED`
-- Probably also compatible with MPU6050
-
-
-## Platforms
-
-### Confirmed Working
-
-This library has been tested on the following platforms and development boards:
-
-#### Atmel AVR
-
-- [Arduino Micro](https://www.arduino.cc/en/Main/ArduinoBoardMicro)
-
-#### Particle
-
-- [Particle Core](https://docs.particle.io/datasheets/core-datasheet/)
-- [Particle Photon](https://docs.particle.io/datasheets/photon-datasheet/)
-- [Particle Electron](https://docs.particle.io/datasheets/electron-datasheet/)
-
-#### ESP8266
-
-- [ESP8266](https://en.wikipedia.org/wiki/ESP8266)
-
-#### Raspberry Pi
-
-- [Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
-
-#### Teensy
-
-- [Teensy 3.2 / 3.1](https://www.pjrc.com/teensy/teensy31.html)
-
-### Other Devices
-
-There is a good chance this library will also work "out of the box" with most devices running on the Arduino, mbed or Raspberry Pi (WiringPi) frameworks.
-
-If you test a new device and can confirm it works, please let me know in [an issue](https://github.com/loopj/i2cdevlib-hal/issues) and I'll update this documentation.
-
-If you'd like to add support for a new development framework, it is relatively simple to implement the underlying I2C functions for your framework. Take a look at [`I2CDevice_arduino.cpp`](https://github.com/loopj/i2c-sensor-hal/blob/master/src/I2CDevice_arduino.cpp) for an example, and feel free to make a pull request for a new framework or platform.
+If you test a new platform or development board and can confirm it works, please let me know in [an issue](https://github.com/loopj/i2cdevlib-hal/issues) and I'll update this documentation.
 
 
 ## Contributing
 
-We'd love you to file issues and send pull requests. The [contributing guidelines](CONTRIBUTING.md) details the process of building and testing this library, as well as the pull request process. Feel free to comment on [existing issues](https://github.com/loopj/i2cdevlib-hal/issues) for clarification or starting points.
+I'd love you to file issues and send pull requests. The [contributing guidelines](CONTRIBUTING.md) details the process of adding support for sensors, devices and frameworks, building and testing the library, as well as the pull request process. Feel free to comment on [existing issues](https://github.com/loopj/i2cdevlib-hal/issues) for clarification or starting points.
 
 
 ## License
 
 This library is free software released under the MIT License. See [LICENSE.txt](LICENSE.txt) for details.
+
+
+[1]: https://www.arduino.cc/
+[2]: https://en.wikipedia.org/wiki/ESP8266
+[3]: https://www.particle.io/
+[4]: https://www.raspberrypi.org/
+[5]: https://www.pjrc.com/teensy/
+[6]: http://platformio.org/#!/boards?filter%5Bplatform%5D=atmelavr
+[7]: http://platformio.org/#!/boards?filter%5Bplatform%5D=espressif
+[8]: http://wiringpi.com/
+[9]: https://www.mbed.com/
