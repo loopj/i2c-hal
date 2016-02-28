@@ -3,8 +3,8 @@
 #define SENSOR_ATTACHED_HMC5883L
 #define SENSOR_ATTACHED_MPU6500
 
-#include "Sensors.h"
-#include "Wire.h"
+#include <Sensors.h>
+#include <Wire.h>
 
 void setup() {
     // Activate serial port (for debug printing)

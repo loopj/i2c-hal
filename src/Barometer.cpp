@@ -1,3 +1,5 @@
+#include <math.h>
+
 #include "Barometer.h"
 
 const float Barometer::PRESSURE_STANDARD_ATMOSPHERE = 1013.25f;

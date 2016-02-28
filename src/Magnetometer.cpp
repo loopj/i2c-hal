@@ -1,3 +1,5 @@
+#include <math.h>
+
 #include "Magnetometer.h"
 
 const float Magnetometer::GAUSS_TO_MICROTESLA = 100.0f;
