@@ -2,7 +2,9 @@
 
 [![Build Status](https://travis-ci.org/loopj/i2c-sensor-hal.svg?branch=master)](https://travis-ci.org/loopj/i2c-sensor-hal)
 
-This library allows you to use sensors like accelerometers, gyroscopes, and barometers in your [Arduino][1], [ESP8266][2], [Particle][3] and [Raspberry Pi][4] projects, without knowing the intimate details about the sensor chip. Say goodbye to reading device data-sheets or learning complex I2C interactions.
+This library allows you to use sensors like accelerometers, gyroscopes, and barometers in your [Arduino][1], [ESP8266][2], [mbed][9], [Particle][3] and [Raspberry Pi][4] projects, without knowing the intimate details about the sensor chip. Say goodbye to reading device data-sheets or learning complex I2C interactions.
+
+Prototype on Arduino or Particle and use the same code when moving to production.
 
 Sensor functions always return [SI units](https://en.wikipedia.org/wiki/International_System_of_Units), so no extra conversions are required in most situations.
 
@@ -169,6 +171,7 @@ This library supports almost every popular embedded platform, including the foll
 |-------------------|----------------------------------------------------------
 | [Arduino][1]      | Any [Atmel AVR based][6] Ardunio, or Arduino-like board
 | [ESP8266][2]      | Any [ESP8266 based][7] board
+| [mbed][9]         | Most boards using the ARM mbed framework
 | [Particle][3]     | Particle Core, Particle Photon, Particle Electron
 | [Raspberry Pi][4] | Any board which support [WiringPi][8]
 | [Teensy][5]       | Any Teensy board
@@ -194,3 +197,4 @@ This library is free software released under the MIT License. See [LICENSE.txt](
 [6]: http://platformio.org/#!/boards?filter%5Bplatform%5D=atmelavr
 [7]: http://platformio.org/#!/boards?filter%5Bplatform%5D=espressif
 [8]: http://wiringpi.com/
+[9]: https://www.mbed.com/
