@@ -68,15 +68,15 @@ See the [sensor types](#sensor-types) section below for details on each sensor t
 
 The following I2C devices are currently supported by this library:
 
-| Device    | Provides Sensors                          | #define                   |
-|---------- |----------------------------------------   |-------------------------- |
-| AK8963    | Magnetometer                              | SENSOR_ATTACHED_AK8963    |
-| BMP085    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP085    |
-| BMP180    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP180    |
-| HMC5883L  | Magnetometer                              | SENSOR_ATTACHED_HMC5883L  |
-| MPU6050   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6050   |
-| MPU6500   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6500   |
-| MPU9150   | Accelerometer, Gyroscope, Magnetometer    | SENSOR_ATTACHED_MPU9150   |
+| Device    | Provides Sensors                          | #define
+|---------- |----------------------------------------   |--------------------------
+| AK8963    | Magnetometer                              | SENSOR_ATTACHED_AK8963
+| BMP085    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP085
+| BMP180    | Barometer, Thermometer                    | SENSOR_ATTACHED_BMP180
+| HMC5883L  | Magnetometer                              | SENSOR_ATTACHED_HMC5883L
+| MPU6050   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6050
+| MPU6500   | Accelerometer, Gyroscope                  | SENSOR_ATTACHED_MPU6500
+| MPU9150   | Accelerometer, Gyroscope, Magnetometer    | SENSOR_ATTACHED_MPU9150
 | MPU9250   | Accelerometer, Gyroscope, Magnetometer    | SENSOR_ATTACHED_MPU9250   |
 
 If you'd like to see another sensor device supported here, see the [contributing](#contributing) section below.

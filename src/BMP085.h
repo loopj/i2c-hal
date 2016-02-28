@@ -6,7 +6,10 @@
 
 // Device info
 #define BMP085_ADDRESS             0x77
+
+// Device IDs for CHIPID register
 #define BMP085_DEVICE_ID           0x55
+#define BMP180_DEVICE_ID           0x55
 
 // Register map
 enum {
@@ -46,7 +49,9 @@ public:
     }
 
     // Initialization
-    BMP085() : I2CDevice(BMP085_ADDRESS), oss(0) {}
+    BMP085() : I2CDevice(BMP085_ADDRESS), oss(0) {
+
+    }
 
     void initialize() {
         loadCalibration();
@@ -54,7 +59,14 @@ public:
     }
 
     bool testConnection() {
-        return getDeviceID() == BMP085_DEVICE_ID;
+        switch(getDeviceID()) {
+            case BMP085_DEVICE_ID:
+                return true;
+            case BMP180_DEVICE_ID:
+                return true;
+        }
+
+        return false;
     }
 
     // Barometer
