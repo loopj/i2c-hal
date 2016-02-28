@@ -22,7 +22,7 @@ First you'll need to define which [devices](#devices) are installed:
 
 ```c++
 #define SENSOR_ATTACHED_MPU6050
-#define SENSOR_ATTACHED_AK8963
+#define SENSOR_ATTACHED_BMP085
 ```
 
 Then you can use [sensors](#sensors) as follows:
@@ -116,27 +116,16 @@ float temperature = thermometer->getTemperature();
 
 The following I2C devices are currently supported by this library:
 
-### AK8963
-
-- Magnetometer
-- `#define SENSOR_ATTACHED_AK8963`
-
-### BMP085
-
-- Barometer, Thermometer
-- `#define SENSOR_ATTACHED_BMP085`
-- Probably also compatible with BMP180
-
-### HMC5883L
-
-- Magnetometer
-- `#define SENSOR_ATTACHED_HMC5883L`
-
-### MPU6050
-
-- Accelerometer, Gyroscope
-- `#define SENSOR_ATTACHED_MPU6050`
-- Probably also compatible with MPU6050
+| Device   	| Provides Sensors                       	| #define                  	|
+|----------	|----------------------------------------	|--------------------------	|
+| AK8963   	| Magnetometer                           	| SENSOR_ATTACHED_AK8963   	|
+| BMP085   	| Barometer, Thermometer                 	| SENSOR_ATTACHED_BMP085   	|
+| BMP180   	| Barometer, Thermometer                 	| SENSOR_ATTACHED_BMP180   	|
+| HMC5883L 	| Magnetometer                           	| SENSOR_ATTACHED_HMC5883L 	|
+| MPU6050  	| Accelerometer, Gyroscope               	| SENSOR_ATTACHED_MPU6050  	|
+| MPU6500  	| Accelerometer, Gyroscope               	| SENSOR_ATTACHED_MPU6500  	|
+| MPU9150  	| Accelerometer, Gyroscope, Magnetometer 	| SENSOR_ATTACHED_MPU9150  	|
+| MPU9250  	| Accelerometer, Gyroscope, Magnetometer 	| SENSOR_ATTACHED_MPU9250  	|
 
 
 ## Platforms
