@@ -9,6 +9,8 @@ Sensor functions always return [SI units](https://en.wikipedia.org/wiki/Internat
 ## Contents
 
 - [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Usage](#usage)
 - [Supported Devices](#supported-devices)
 - [Sensor Types](#sensor-types)
   - [Accelerometer](#accelerometer)
@@ -16,7 +18,7 @@ Sensor functions always return [SI units](https://en.wikipedia.org/wiki/Internat
   - [Gyroscope](#gyroscope)
   - [Magnetometer](#magnetometer)
   - [Thermometer](#thermometer)
-- [Platforms, Frameworks & Boards](#platforms)
+- [Platforms, Frameworks & Boards](#platforms-frameworks--boards)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -26,17 +28,19 @@ Sensor functions always return [SI units](https://en.wikipedia.org/wiki/Internat
 
 #### Using PlatformIO
 
+The recommended way to use this library is with [PlatformIO](http://platformio.org/):
+
 ```shell
 $ platformio lib install 578
 ```
 
 #### Using the Arduino Library Manager
 
-Find `Sensors by James Smith` in the Library Manager and click install.
+If you are using the Arduino IDE, find `Sensors` by James Smith in the Library Manager and click install.
 
 #### Manual Installation
 
-If you can't use PlatformIO or Arduino Library Manager, you can always simply copy the library into your project or include it as a git submodule. This is the preferred approach for the Particle platform.
+If you can't use PlatformIO or Arduino Library Manager, you can always simply copy the library into your project or include it as a git submodule. This is the preferred approach for the Particle platform, as you can see in the [particle example app ](https://github.com/loopj/i2c-sensor-hal/tree/master/examples/particle).
 
 ## Usage
 
