@@ -1,6 +1,10 @@
-#include "Wire.h"
+// Define which sensors are attached
+#define BMP085_INSTALLED
+#define HMC5883L_INSTALLED
+#define MPU6500_INSTALLED
 
 #include "Sensors.h"
+#include "Wire.h"
 
 void setup() {
     // Activate serial port (for debug printing)

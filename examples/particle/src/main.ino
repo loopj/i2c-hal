@@ -1,3 +1,9 @@
+// Define which sensors are attached
+#define BMP085_INSTALLED
+#define HMC5883L_INSTALLED
+#define MPU6500_INSTALLED
+
+// Include the sensor abstraction library
 #include "Sensors.h"
 
 void setup() {

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Sensor_Config.h"
-
 #ifdef MPU6500_INSTALLED
 
 #include <stdint.h>
@@ -165,47 +163,148 @@ public:
     }
 
     // Initialization
-    MPU6500(uint8_t address = MPU6500_DEFAULT_ADDRESS);
-    void initialize();
-    bool testConnection();
+    MPU6500(uint8_t address = MPU6500_DEFAULT_ADDRESS) : I2CDevice(address) {
+
+    }
+
+    void initialize() {
+        // Wake up the device
+        setSleepEnabled(false);
+
+        // Use the most accurate clock source
+        setClockSource(MPU6500_CLOCK_PLL);
+
+        // Set the sensitivity to max on gyro and accel
+        setFullScaleGyroRange(MPU6500_GYRO_FS_250);
+        setFullScaleAccelRange(MPU6500_ACCEL_FS_2);
+
+        // Allow direct I2C access to devices connected to the MPU6500 aux bus
+        setI2cBypassEnabled(true);
+
+        // Calculate the scale factors from the configured ranges
+        accelScale = getAccelScale(getFullScaleAccelRange());
+        gyroScale = getGyroScale(getFullScaleGyroRange());
+    }
+
+    bool testConnection() {
+        return getDeviceID() == MPU6500_DEVICE_ID;
+    }
 
     // Accelerometer
-    Vector3 getAcceleration();
+    Vector3 getAcceleration() {
+        Vector3 acceleration;
+
+        // Convert raw data into signed 16-bit data
+        int16_t rawAccel[3];
+        readWords(MPU6500_RA_ACCEL_XOUT_H, 3, (uint16_t *)rawAccel);
+
+        // Apply accelerometer scale to get Gs, convert to m/s^2
+        acceleration.x = (float)rawAccel[0]/accelScale * STANDARD_GRAVITY;
+        acceleration.y = (float)rawAccel[1]/accelScale * STANDARD_GRAVITY;
+        acceleration.z = (float)rawAccel[2]/accelScale * STANDARD_GRAVITY;
+
+        return acceleration;
+    }
 
     // Gyroscope
-    Vector3 getRotation();
+    Vector3 getRotation() {
+        Vector3 rotation;
+
+        // Convert raw data into signed 16-bit data
+        int16_t rawRotation[3];
+        readWords(MPU6500_RA_GYRO_XOUT_H, 3, (uint16_t *)rawRotation);
+
+        // Apply gyroscope scale to get deg/s, convert to rad/s
+        rotation.x = (float)rawRotation[0]/gyroScale * M_PI/180.0;
+        rotation.y = (float)rawRotation[1]/gyroScale * M_PI/180.0;
+        rotation.z = (float)rawRotation[2]/gyroScale * M_PI/180.0;
+
+        return rotation;
+    }
 
     // GYRO_CONFIG register
-    uint8_t getFullScaleGyroRange();
-    void setFullScaleGyroRange(uint8_t range);
+    uint8_t getFullScaleGyroRange() {
+        readBits(MPU6500_RA_GYRO_CONFIG, MPU6500_GYRO_FS_SEL_BIT, MPU6500_GYRO_FS_SEL_LEN, buffer);
+
+        return buffer[0];
+    }
+
+    void setFullScaleGyroRange(uint8_t range) {
+        writeBits(MPU6500_RA_GYRO_CONFIG, MPU6500_GYRO_FS_SEL_BIT, MPU6500_GYRO_FS_SEL_LEN, range);
+        gyroScale = getGyroScale(range);
+    }
 
     // ACCEL_CONFIG register
-    uint8_t getFullScaleAccelRange();
-    void setFullScaleAccelRange(uint8_t range);
+    uint8_t getFullScaleAccelRange() {
+        readBits(MPU6500_RA_ACCEL_CONFIG, MPU6500_ACCEL_FS_SEL_BIT, MPU6500_ACCEL_FS_SEL_LEN, buffer);
+
+        return buffer[0];
+    }
+
+    void setFullScaleAccelRange(uint8_t range) {
+        writeBits(MPU6500_RA_ACCEL_CONFIG, MPU6500_ACCEL_FS_SEL_BIT, MPU6500_ACCEL_FS_SEL_LEN, range);
+        accelScale = getAccelScale(range);
+    }
 
     // INT_PIN_CFG register
-    bool getI2cBypassEnabled();
-    void setI2cBypassEnabled(bool enabled);
+    bool getI2cBypassEnabled() {
+        readBit(MPU6500_RA_INT_PIN_CFG, MPU6500_BYPASS_EN_BIT, buffer);
+        return buffer[0];
+    }
+
+    void setI2cBypassEnabled(bool enabled) {
+        writeBit(MPU6500_RA_INT_PIN_CFG, MPU6500_BYPASS_EN_BIT, enabled);
+    }
 
     // USER_CTRL register
-    bool getDMPEnabled();
-    void setDMPEnabled(bool enabled);
+    bool getDMPEnabled() {
+        readBit(MPU6500_RA_USER_CTRL, MPU6500_DMP_EN_BIT, buffer);
+        return buffer[0];
+    }
+
+    void setDMPEnabled(bool enabled) {
+        writeBit(MPU6500_RA_USER_CTRL, MPU6500_DMP_EN_BIT, enabled);
+    }
 
     // PWR_MGMT_1 register
-    void reset();
-    bool getSleepEnabled();
-    void setSleepEnabled(bool enabled);
-    uint8_t getClockSource();
-    void setClockSource(uint8_t source);
+    void reset() {
+        writeBit(MPU6500_RA_PWR_MGMT_1, MPU6500_DEVICE_RESET_BIT, 1);
+    }
+    bool getSleepEnabled() {
+        readBit(MPU6500_RA_PWR_MGMT_1, MPU6500_SLEEP_BIT, buffer);
+        return buffer[0];
+    }
+
+    void setSleepEnabled(bool enabled) {
+        writeBit(MPU6500_RA_PWR_MGMT_1, MPU6500_SLEEP_BIT, enabled);
+    }
+
+    uint8_t getClockSource() {
+        readBits(MPU6500_RA_PWR_MGMT_1, MPU6500_CLKSEL_BIT, MPU6500_CLKSEL_LEN, buffer);
+        return buffer[0];
+    }
+
+    void setClockSource(uint8_t source) {
+        writeBits(MPU6500_RA_PWR_MGMT_1, MPU6500_CLKSEL_BIT, MPU6500_CLKSEL_LEN, source);
+    }
 
     // WHO_AM_I register
-    uint8_t getDeviceID();
+    uint8_t getDeviceID() {
+        readByte(MPU6500_RA_WHO_AM_I, buffer);
+        return buffer[0];
+    }
 
 protected:
-    float getGyroScale(uint8_t gyroRange);
-    float getAccelScale(uint8_t accelRange);
     float accelScale;
     float gyroScale;
+
+    float getGyroScale(uint8_t gyroRange) {
+        return 16.4 * pow(2, 3 - gyroRange);
+    }
+
+    float getAccelScale(uint8_t accelRange) {
+        return 2048.0 * pow(2, 3 - accelRange);
+    }
 };
 
 #endif // MPU6500_INSTALLED
