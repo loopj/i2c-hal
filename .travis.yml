@@ -7,11 +7,11 @@ cache:
         - "~/.platformio"
 
 env:
-    - PLATFORMIO_CI_SRC=examples/arduino
-    - PLATFORMIO_CI_SRC=examples/mbed
+    - PLATFORMIO_PROJECT_DIR=examples/arduino
+    - PLATFORMIO_PROJECT_DIR=examples/mbed
 
 install:
     - pip install -U platformio
 
 script:
-    - platformio ci --project-conf=examples/arduino/platformio.ini --lib="."
+    - platformio run -d $PLATFORMIO_PROJECT_DIR
