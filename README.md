@@ -13,13 +13,13 @@ Sensor functions always return [SI units](https://en.wikipedia.org/wiki/Internat
 - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Usage](#usage)
-- [Supported Devices](#supported-devices)
 - [Sensor Types](#sensor-types)
   - [Accelerometer](#accelerometer)
   - [Barometer](#barometer)
   - [Gyroscope](#gyroscope)
   - [Magnetometer](#magnetometer)
   - [Thermometer](#thermometer)
+- [Supported Devices](#supported-devices)
 - [Platforms, Frameworks & Boards](#platforms-frameworks--boards)
 - [Contributing](#contributing)
 - [License](#license)
@@ -46,7 +46,7 @@ If you can't use PlatformIO or Arduino Library Manager, you can always simply co
 
 ## Usage
 
-Once you've installed the library, you'll need to [define which sensor devices are installed](#supported-devices) and include `Sensors.h`:
+Once you've installed the library, you'll need to define which sensor devices are installed (see [supported devices](#supported-devices)) and then include `Sensors.h`:
 
 ```c++
 #define SENSORS_MPU6050_ATTACHED
@@ -62,24 +62,6 @@ Vector3 acceleration = accelerometer->getAcceleration();
 ```
 
 See the [sensor types](#sensor-types) section below for details on each sensor type, and check out the [example apps folder](https://github.com/loopj/i2c-sensor-hal/tree/master/examples) for some complete examples.
-
-
-## Supported Devices
-
-The following I2C devices are currently supported by this library:
-
-| Device    | Provides Sensors                          | #define
-|---------- |----------------------------------------   |--------------------------
-| AK8963    | Magnetometer                              | SENSORS_AK8963_ATTACHED
-| BMP085    | Barometer, Thermometer                    | SENSORS_BMP085_ATTACHED
-| BMP180    | Barometer, Thermometer                    | SENSORS_BMP180_ATTACHED
-| HMC5883L  | Magnetometer                              | SENSORS_HMC5883L_ATTACHED
-| MPU6050   | Accelerometer, Gyroscope                  | SENSORS_MPU6050_ATTACHED
-| MPU6500   | Accelerometer, Gyroscope                  | SENSORS_MPU6500_ATTACHED
-| MPU9150   | Accelerometer, Gyroscope, Magnetometer    | SENSORS_MPU9150_ATTACHED
-| MPU9250   | Accelerometer, Gyroscope, Magnetometer    | SENSORS_MPU9250_ATTACHED
-
-If you'd like to see another sensor device supported here, see the [contributing](#contributing) section below.
 
 
 ## Sensor Types
@@ -161,6 +143,24 @@ Thermometer *thermometer = Sensors::getThermometer();
 // Get the current temperature, in °C
 float temperature = thermometer->getTemperature();
 ```
+
+
+## Supported Devices
+
+The following I2C devices are currently supported by this library:
+
+| Device    | Provides Sensors                          | #define
+|---------- |----------------------------------------   |--------------------------
+| AK8963    | Magnetometer                              | SENSORS_AK8963_ATTACHED
+| BMP085    | Barometer, Thermometer                    | SENSORS_BMP085_ATTACHED
+| BMP180    | Barometer, Thermometer                    | SENSORS_BMP180_ATTACHED
+| HMC5883L  | Magnetometer                              | SENSORS_HMC5883L_ATTACHED
+| MPU6050   | Accelerometer, Gyroscope                  | SENSORS_MPU6050_ATTACHED
+| MPU6500   | Accelerometer, Gyroscope                  | SENSORS_MPU6500_ATTACHED
+| MPU9150   | Accelerometer, Gyroscope, Magnetometer    | SENSORS_MPU9150_ATTACHED
+| MPU9250   | Accelerometer, Gyroscope, Magnetometer    | SENSORS_MPU9250_ATTACHED
+
+If you'd like to see another sensor device supported here, see the [contributing](#contributing) section below.
 
 
 ## Platforms, Frameworks & Boards
