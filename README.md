@@ -169,7 +169,7 @@ This library supports almost every popular embedded platform, including the foll
 
 | Platform          | Boards
 |-------------------|----------------------------------------------------------
-| [Arduino][1]      | Any [Atmel AVR based][6] Ardunio, or Arduino-like board
+| [Arduino][1]      | Any [Atmel AVR][6] or [Atmel SAM][10] based Ardunio, or Arduino-like board
 | [ESP8266][2]      | Any [ESP8266 based][7] board
 | [mbed][9]         | Most boards using the ARM mbed framework
 | [Particle][3]     | Particle Core, Particle Photon, Particle Electron
@@ -198,3 +198,4 @@ This library is free software released under the MIT License. See [LICENSE.txt](
 [7]: http://platformio.org/#!/boards?filter%5Bplatform%5D=espressif
 [8]: http://wiringpi.com/
 [9]: https://www.mbed.com/
+[10]: http://platformio.org/#!/boards?filter%5Bplatform%5D=atmelsam
