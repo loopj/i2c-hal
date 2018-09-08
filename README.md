@@ -1,6 +1,6 @@
 # I2C Abstraction Layer
 
-[![Build Status](https://travis-ci.org/loopj/i2c-sensor-hal.svg?branch=master)](https://travis-ci.org/loopj/i2c-sensor-hal)
+[![Build Status](https://travis-ci.org/loopj/i2c-hal.svg?branch=master)](https://travis-ci.org/loopj/i2c-hal)
 
 This library allows you to use I2C devices such as accelerometers, gyroscopes, and barometers in your [Arduino][1], [ESP8266][2], [mbed][9], [Particle][3] and [Raspberry Pi][4] projects, without knowing the intimate details about the sensor chip. Say goodbye to reading device data-sheets or learning complex I2C interactions.
 
@@ -13,7 +13,7 @@ Sensor functions always return [SI units](https://en.wikipedia.org/wiki/Internat
 - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Usage](#usage)
-- [Sensors](#sensor)
+- [Sensors](#sensors)
   - [Accelerometer](#accelerometer)
   - [Barometer](#barometer)
   - [Gyroscope](#gyroscope)
