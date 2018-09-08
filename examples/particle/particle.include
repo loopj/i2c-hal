@@ -1,5 +1,0 @@
-lib/**/*.h
-lib/**/*.cpp
-src/**/*.h
-src/**/*.cpp
-src/**/*.ino
