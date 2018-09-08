@@ -13,7 +13,7 @@ Sensor functions always return [SI units](https://en.wikipedia.org/wiki/Internat
 - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Usage](#usage)
-- [Sensors](#sensor)
+- [Sensors](#sensors)
   - [Accelerometer](#accelerometer)
   - [Barometer](#barometer)
   - [Gyroscope](#gyroscope)
