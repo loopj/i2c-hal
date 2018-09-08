@@ -1,8 +1,8 @@
-# I2C Sensor Abstraction Layer
+# I2C Abstraction Layer
 
 [![Build Status](https://travis-ci.org/loopj/i2c-sensor-hal.svg?branch=master)](https://travis-ci.org/loopj/i2c-sensor-hal)
 
-This library allows you to use sensors like accelerometers, gyroscopes, and barometers in your [Arduino][1], [ESP8266][2], [mbed][9], [Particle][3] and [Raspberry Pi][4] projects, without knowing the intimate details about the sensor chip. Say goodbye to reading device data-sheets or learning complex I2C interactions.
+This library allows you to use I2C devices such as accelerometers, gyroscopes, and barometers in your [Arduino][1], [ESP8266][2], [mbed][9], [Particle][3] and [Raspberry Pi][4] projects, without knowing the intimate details about the sensor chip. Say goodbye to reading device data-sheets or learning complex I2C interactions.
 
 Prototype on Arduino or Particle and use the same code when moving to production.
 
@@ -13,7 +13,7 @@ Sensor functions always return [SI units](https://en.wikipedia.org/wiki/Internat
 - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Usage](#usage)
-- [Sensor Types](#sensor-types)
+- [Sensors](#sensor)
   - [Accelerometer](#accelerometer)
   - [Barometer](#barometer)
   - [Gyroscope](#gyroscope)
@@ -64,7 +64,7 @@ Vector3 acceleration = accelerometer->getAcceleration();
 See the [sensor types](#sensor-types) section below for details on each sensor type, and check out the [example apps folder](https://github.com/loopj/i2c-sensor-hal/tree/master/examples) for some complete examples.
 
 
-## Sensor Types
+## Sensors
 
 The following sensor types are currently supported by this library:
 
@@ -181,7 +181,7 @@ If you test a new platform or development board and can confirm it works, please
 
 ## Contributing
 
-I'd love you to file issues and send pull requests. The [contributing guidelines](CONTRIBUTING.md) details the process of adding support for sensors, devices and frameworks, building and testing the library, as well as the pull request process. Feel free to comment on [existing issues](https://github.com/loopj/i2cdevlib-hal/issues) for clarification or starting points.
+I'd love you to file issues and send pull requests. The [contributing guidelines](CONTRIBUTING.md) details the process of adding support for sensors, devices and frameworks, building and testing the library, as well as the pull request process. Feel free to comment on [existing issues](https://github.com/loopj/i2c-hal/issues) for clarification or starting points.
 
 
 ## License
