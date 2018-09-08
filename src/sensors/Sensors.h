@@ -80,7 +80,6 @@ public:
         #endif
     }
 
-    #ifdef ACCELEROMETER_ATTACHED
     static Accelerometer *getAccelerometer() {
         #ifdef SENSORS_MPU6050_ATTACHED
         return &MPU6050::getInstance();
@@ -88,9 +87,7 @@ public:
         return NULL;
         #endif
     }
-    #endif
 
-    #ifdef BAROMETER_ATTACHED
     static Barometer *getBarometer() {
         #ifdef SENSORS_BMP085_ATTACHED
         return &BMP085::getInstance();
@@ -98,9 +95,7 @@ public:
         return NULL;
         #endif
     }
-    #endif
 
-    #ifdef GYROSCOPE_ATTACHED
     static Gyroscope *getGyroscope() {
         #ifdef SENSORS_MPU6050_ATTACHED
         return &MPU6050::getInstance();
@@ -108,9 +103,7 @@ public:
         return NULL;
         #endif
     }
-    #endif
 
-    #ifdef MAGNETOMETER_ATTACHED
     static Magnetometer *getMagnetometer() {
         #if defined(SENSORS_AK8963_ATTACHED)
         return &AK8963::getInstance();
@@ -120,9 +113,7 @@ public:
         return NULL;
         #endif
     }
-    #endif
 
-    #ifdef THERMOMETER_ATTACHED
     static Thermometer *getThermometer() {
         #ifdef SENSORS_BMP085_ATTACHED
         return &BMP085::getInstance();
@@ -130,5 +121,4 @@ public:
         return NULL;
         #endif
     }
-    #endif
 };
