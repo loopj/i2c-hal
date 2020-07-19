@@ -11,11 +11,11 @@
     #include "application.h"
 #endif
 
-#include "I2CDevice.h"
+#include "I2C.h"
 
-I2CDevice::I2CDevice(uint8_t address) : address(address) {}
+void I2C_init() {}
 
-bool I2CDevice::readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
+bool I2C_readBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t *data) {
     uint8_t count = 0;
 
     // Select the slave address and register to read from
@@ -33,7 +33,7 @@ bool I2CDevice::readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
     return (count == length);
 }
 
-bool I2CDevice::writeBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
+bool I2C_writeBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t *data) {
     // Select the slave address and register to write to
     Wire.beginTransmission(address);
     Wire.write(regAddr);
@@ -45,7 +45,7 @@ bool I2CDevice::writeBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
     return (Wire.endTransmission() == 0);
 }
 
-void I2CDevice::usleep(unsigned int us) {
+void I2C_usleep(unsigned int us) {
     delayMicroseconds(us);
 }
 

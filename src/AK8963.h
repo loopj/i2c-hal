@@ -1,6 +1,6 @@
 #pragma once
 
-#include "I2CDevice.h"
+#include "I2C.h"
 #include "Magnetometer.h"
 #include "Vector3.h"
 

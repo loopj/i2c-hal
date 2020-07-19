@@ -5,7 +5,7 @@
 
 #include "Accelerometer.h"
 #include "Gyroscope.h"
-#include "I2CDevice.h"
+#include "I2C.h"
 #include "Vector3.h"
 
 // Device info
@@ -68,165 +68,37 @@ enum {
 #define MPU6050_CLOCK_PLL           0x01
 #define MPU6050_CLOCK_KEEP_RESET    0x07
 
-class MPU6050 : public I2CDevice, public Accelerometer, public Gyroscope {
-public:
-    static MPU6050& getInstance() {
-        static MPU6050 instance;
-        return instance;
-    }
+void MPU6050_initialize(uint8_t deviceAddress);
+bool MPU6050_testConnection();
 
-    // Initialization
-    MPU6050(uint8_t address = MPU6050_DEFAULT_ADDRESS) : I2CDevice(address) {
+// ACCEL_XOUT register
+Vector3 MPU6050_getAcceleration();
 
-    }
+// GYRO_XOUT register
+Vector3 MPU6050_getRotation();
 
-    void initialize() {
-        // Wake up the device
-        setSleepEnabled(false);
+// GYRO_CONFIG register
+uint8_t MPU6050_getFullScaleGyroRange();
+void MPU6050_etFullScaleGyroRange(uint8_t range);
 
-        // Use the most accurate clock source
-        setClockSource(MPU6050_CLOCK_PLL);
+// ACCEL_CONFIG register
+uint8_t MPU6050_getFullScaleAccelRange();
+void MPU6050_setFullScaleAccelRange(uint8_t range);
 
-        // Set the sensitivity to max on gyro and accel
-        setFullScaleGyroRange(MPU6050_GYRO_FS_250);
-        setFullScaleAccelRange(MPU6050_ACCEL_FS_2);
+// INT_PIN_CFG register
+bool MPU6050_getI2cBypassEnabled();
+void MPU6050_setI2cBypassEnabled(bool enabled);
 
-        // Allow direct I2C access to devices connected to the MPU6050 aux bus
-        setI2cBypassEnabled(true);
+// USER_CTRL register
+bool MPU6050_getDMPEnabled();
+void MPU6050_setDMPEnabled(bool enabled);
 
-        // Calculate the scale factors from the configured ranges
-        accelScale = getAccelScale(getFullScaleAccelRange());
-        gyroScale = getGyroScale(getFullScaleGyroRange());
-    }
+// PWR_MGMT_1 register
+void MPU6050_reset();
+bool MPU6050_getSleepEnabled();
+void MPU6050_setSleepEnabled(bool enabled);
+uint8_t MPU6050_getClockSource();
+void MPU6050_setClockSource(uint8_t source);
 
-    bool testConnection() {
-        switch(getDeviceID()) {
-            case MPU6050_DEVICE_ID:
-                return true;
-            case MPU6500_DEVICE_ID:
-                return true;
-            case MPU9150_DEVICE_ID:
-                return true;
-            case MPU9250_DEVICE_ID:
-                return true;
-        }
-
-        return false;
-    }
-
-    // Accelerometer
-    Vector3 getAcceleration() {
-        Vector3 acceleration;
-
-        // Convert raw data into signed 16-bit data
-        int16_t rawAccel[3];
-        readWords(MPU6050_RA_ACCEL_XOUT_H, 3, (uint16_t *)rawAccel);
-
-        // Apply accelerometer scale to get Gs, convert to m/s^2
-        acceleration.x = (float)rawAccel[0]/accelScale * STANDARD_GRAVITY;
-        acceleration.y = (float)rawAccel[1]/accelScale * STANDARD_GRAVITY;
-        acceleration.z = (float)rawAccel[2]/accelScale * STANDARD_GRAVITY;
-
-        return acceleration;
-    }
-
-    // Gyroscope
-    Vector3 getRotation() {
-        Vector3 rotation;
-
-        // Convert raw data into signed 16-bit data
-        int16_t rawRotation[3];
-        readWords(MPU6050_RA_GYRO_XOUT_H, 3, (uint16_t *)rawRotation);
-
-        // Apply gyroscope scale to get deg/s, convert to rad/s
-        rotation.x = (float)rawRotation[0]/gyroScale * M_PI/180.0;
-        rotation.y = (float)rawRotation[1]/gyroScale * M_PI/180.0;
-        rotation.z = (float)rawRotation[2]/gyroScale * M_PI/180.0;
-
-        return rotation;
-    }
-
-    // GYRO_CONFIG register
-    uint8_t getFullScaleGyroRange() {
-        readBits(MPU6050_RA_GYRO_CONFIG, MPU6050_GYRO_FS_SEL_BIT, MPU6050_GYRO_FS_SEL_LEN, buffer);
-
-        return buffer[0];
-    }
-
-    void setFullScaleGyroRange(uint8_t range) {
-        writeBits(MPU6050_RA_GYRO_CONFIG, MPU6050_GYRO_FS_SEL_BIT, MPU6050_GYRO_FS_SEL_LEN, range);
-        gyroScale = getGyroScale(range);
-    }
-
-    // ACCEL_CONFIG register
-    uint8_t getFullScaleAccelRange() {
-        readBits(MPU6050_RA_ACCEL_CONFIG, MPU6050_ACCEL_FS_SEL_BIT, MPU6050_ACCEL_FS_SEL_LEN, buffer);
-
-        return buffer[0];
-    }
-
-    void setFullScaleAccelRange(uint8_t range) {
-        writeBits(MPU6050_RA_ACCEL_CONFIG, MPU6050_ACCEL_FS_SEL_BIT, MPU6050_ACCEL_FS_SEL_LEN, range);
-        accelScale = getAccelScale(range);
-    }
-
-    // INT_PIN_CFG register
-    bool getI2cBypassEnabled() {
-        readBit(MPU6050_RA_INT_PIN_CFG, MPU6050_BYPASS_EN_BIT, buffer);
-        return buffer[0];
-    }
-
-    void setI2cBypassEnabled(bool enabled) {
-        writeBit(MPU6050_RA_INT_PIN_CFG, MPU6050_BYPASS_EN_BIT, enabled);
-    }
-
-    // USER_CTRL register
-    bool getDMPEnabled() {
-        readBit(MPU6050_RA_USER_CTRL, MPU6050_DMP_EN_BIT, buffer);
-        return buffer[0];
-    }
-
-    void setDMPEnabled(bool enabled) {
-        writeBit(MPU6050_RA_USER_CTRL, MPU6050_DMP_EN_BIT, enabled);
-    }
-
-    // PWR_MGMT_1 register
-    void reset() {
-        writeBit(MPU6050_RA_PWR_MGMT_1, MPU6050_DEVICE_RESET_BIT, 1);
-    }
-    bool getSleepEnabled() {
-        readBit(MPU6050_RA_PWR_MGMT_1, MPU6050_SLEEP_BIT, buffer);
-        return buffer[0];
-    }
-
-    void setSleepEnabled(bool enabled) {
-        writeBit(MPU6050_RA_PWR_MGMT_1, MPU6050_SLEEP_BIT, enabled);
-    }
-
-    uint8_t getClockSource() {
-        readBits(MPU6050_RA_PWR_MGMT_1, MPU6050_CLKSEL_BIT, MPU6050_CLKSEL_LEN, buffer);
-        return buffer[0];
-    }
-
-    void setClockSource(uint8_t source) {
-        writeBits(MPU6050_RA_PWR_MGMT_1, MPU6050_CLKSEL_BIT, MPU6050_CLKSEL_LEN, source);
-    }
-
-    // WHO_AM_I register
-    uint8_t getDeviceID() {
-        readByte(MPU6050_RA_WHO_AM_I, buffer);
-        return buffer[0];
-    }
-
-protected:
-    float accelScale;
-    float gyroScale;
-
-    float getGyroScale(uint8_t gyroRange) {
-        return 16.4 * pow(2, 3 - gyroRange);
-    }
-
-    float getAccelScale(uint8_t accelRange) {
-        return 2048.0 * pow(2, 3 - accelRange);
-    }
-};
+// WHO_AM_I register
+uint8_t MPU6050_getDeviceID();

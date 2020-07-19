@@ -1,6 +1,6 @@
 #pragma once
 
-#include "I2CDevice.h"
+#include "I2C.h"
 #include "Barometer.h"
 #include "Thermometer.h"
 

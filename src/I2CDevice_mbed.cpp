@@ -4,36 +4,36 @@
 
 #include "mbed.h"
 
-#include "I2CDevice.h"
+#include "I2C.h"
 
 // I2C device handle (internal)
 I2C i2c(I2C_SDA, I2C_SCL);
 
-I2CDevice::I2CDevice(uint8_t address) : address(address) {
+void I2C_init() {
     // Use high-speed i2c
-    i2c.frequency(400000);
+    i2c.frequency(400000);    
 }
 
-bool I2CDevice::readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
+bool I2C_readBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t *data) {
     // Start the i2c transaction
     i2c.start();
 
     // Select the slave address and register to read from
-    i2c.write(address << 1);
+    i2c.write(devAddr << 1);
     i2c.write(regAddr);
 
     // // Read the data
-    i2c.read(address << 1, (char *)data, length);
+    i2c.read(devAddr << 1, (char *)data, length);
 
     return true;
 }
 
-bool I2CDevice::writeBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
+bool I2C_writeBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t *data) {
     // Start the i2c transaction
     i2c.start();
 
     // Select the slave address and register to write to
-    i2c.write(address << 1);
+    i2c.write(devAddr << 1);
     i2c.write(regAddr);
 
     // Write the data
@@ -47,7 +47,7 @@ bool I2CDevice::writeBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
     return true;
 }
 
-void I2CDevice::usleep(unsigned int us) {
+void I2C_usleep(unsigned int us) {
     wait_us(us);
 }
 
